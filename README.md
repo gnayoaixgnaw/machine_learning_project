@@ -22,6 +22,8 @@ Basic machine learning algorithms:
 
 8.k-Nearest neighbors
 
+
+
 ## Linear regression
 
 Linear regression is very simple and basic.First, linear regression is supervised model, which means data should be labelled.Then, for linear regression, it will find the relationships between features(x1,x2,x3....), which represent as coefficients of these variables.
