@@ -120,11 +120,11 @@ Gradient Descent is an iterative algorithm,Start from an initial guess and try t
 
 Suppose ▽l(β) is a vector whose ith entry is ith partial derivative evaluated at βi
 
-![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/WX20210221-052700%402x.png)
+![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/derivative1.png)
 
 **Gradient Descent pseudocode**
 
-![pseudocode](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/pseudocode1.png)
+![pseudocode](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/pseudocode1.png)
 
     • Here l is the ”learning rate” and controls speed of convergence
     • ▽l(β iter) is the gradient of L evaluated at iteration ”iter” with parameter of qiter
@@ -153,7 +153,7 @@ then do expansion:
    
 Since it has mutiple dimensions,we compute partial derivatives:
 
-![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/derivative.png)  
+![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/derivative.png)  
 
 
 Now we can compute components of the gradients and then sum them up and update weights in the next iteration.
@@ -180,12 +180,12 @@ The learning rate is a vital parameter in gradient descent as learning rate is r
 
 small learning rate:
 
-![small_lr](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/lr_small.png) 
+![small_lr](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/lr_small.png) 
 
 large learning rate:
 
 
-![large_lr](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/lr_large.png) 
+![large_lr](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/lr_large.png) 
 
 So how to find a proper learning rate? If we set lr a large value, the function will converge very fast at beginning but may miss the optimal solution,but if we set a small value, it will cost too much time to converge.
 
