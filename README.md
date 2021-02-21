@@ -44,10 +44,19 @@ Then consider this data also as tuples of (1, 18), (2, 22), (3, 45), (4, 49), (5
 
     • Our goal is to minimize errors
 
-To minimize the amount of distance(errors), we need to find proper β1 and β0. In this case, we choose **least-squares fit**.
-Least-squares fit means, we build a function:
+To minimize the amount of distance(errors), we need to find proper β1 and β0.We choose **least-squares fit**.
+Least-squares fit gives a function:
 
-***l(β1,β0) =∑ i( f (xi) - xi)²***
+***l(β1,β0) =∑ i( f (xi) - yi)²***
 
-This function often referred to as a ***lost function*** .So when we want to fit a line to given data, we need to minimize the lost function: min l(β1,β0).
+which often referred to as a ***lost function*** .So when we want to fit a line to given data, we need to minimize the lost function.
 
+In this case, computing lost function:
+
+        l(β1,β0) =∑ i( f (xi) - yi)²
+                 =∑ i( β1*xi + β0 - yi)²
+        l'(β1,β0)=∑ i 2*( β1*xi² - xi*yi)
+                 =2m(1 + 4 + 9 + 16 + 25) 􀀀 2(18 + 44 + 135 + 196 + 430)
+                 = 110m - 1646
+Since cost function is a ”Convex” function, it means when its derivative is 0, the cost function hits bottom.
+So loss minimized at m = 14.96.
