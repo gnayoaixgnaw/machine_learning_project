@@ -110,6 +110,7 @@ Now we have a polynomial linear regression:
 Similarly, we get the lost function :
 
    ***l(β0,β1...) =1/n∑ i( f (xi) - yi)²***
+   
 So in order to minimize the cost function, we need to choose each βi to minimize l(β0,β1...),this is what we called ***Gradient Descent***.
 
 Gradient Descent is an iterative algorithm,Start from an initial guess and try to incrementally improve current solution,and at iteration step q(iter) is the current guess for βi.
