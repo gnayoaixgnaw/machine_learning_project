@@ -29,8 +29,15 @@ Basic machine learning algorithms:
 Linear regression is very simple and basic.First, linear regression is supervised model, which means data should be labelled.Then, for linear regression, it will find the relationships between features(x1,x2,x3....), which represent as coefficients of these variables.
 
 >simple linear regression
+>
 >dsasad
+>
 >saddd
+>>sa
+>>sasas
+>>sa
+>>
+sas
 
 
 Let's look at a simple linear regression equation: 
