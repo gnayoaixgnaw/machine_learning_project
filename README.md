@@ -176,3 +176,13 @@ Here are more detailed pseudocode to compute gradient:
 
 **Learning rate**
 
+The learning rate is a vital parameter in gradient descent as learning rate is responsible for convergence, if lr is small, convergent speed will be slow, on the contrary,when lr is large, function will converge very fast.
+
+small learning rate:
+
+![small_lr](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/lr_small.png) 
+
+large learning rate:
+
+
+![large_lr](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/lr_large.png) 
