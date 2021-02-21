@@ -2,7 +2,7 @@
 
 ***Explained machine learning models and projects based on ML***
 
-Basic Machine learning algorithms:
+Basic machine learning algorithms:
 
 1.**Linear regression**
 
@@ -24,4 +24,8 @@ Basic Machine learning algorithms:
 
 ## Linear regression
 
-
+Linear regression is very simple and basic.First, linear regression is supervised model, which means data should be labelled.Then, for linear regression, it will find the relationships between features(x1,x2,x3....), which represent as coefficients of these variables.
+Let's look at a simple linear regression equation: 
+'''
+Y = β1X + β0 + e
+'''
