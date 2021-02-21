@@ -3,7 +3,7 @@ Explained machine learning models and projects based on ML
 
 Basic Machine learning algorithms:
 
-1.*Linear regression*
+1.**Linear regression**
 
 2.Logistic regression
 
