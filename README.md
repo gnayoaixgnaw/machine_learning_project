@@ -186,3 +186,26 @@ large learning rate:
 
 
 ![large_lr](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/lr_large.png) 
+
+So how to find a proper learning rate? If we set lr a large value, the function will converge very fast at beginning but may miss the optimal solution,but if we set a small value, it will cost too much time to converge.
+
+>Here I choose a standard method, which name is ***Bold Driver*** to change learning rate dynamicly:
+>
+>At each iteration, compute the cost l(β0,β1...)
+>
+>Better than last time? 
+>
+>If cost decreases, increase learning rate
+>l = 1.05 * l
+>
+>Worse than last time?
+>
+>l = 0.5 * l
+>If cost increases, decrease rate
+
+This graph illustrate the advantages of adaptive lr vs constant lr:
+
+![different](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/adaptivelr.png) 
+
+
+
