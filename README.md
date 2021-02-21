@@ -116,10 +116,40 @@ So in order to minimize the cost function, we need to choose each βi to minimiz
 Gradient Descent is an iterative algorithm,Start from an initial guess and try to incrementally improve current solution,and at iteration step q(iter) is the current guess for βi.
 
 
-#### how to calculate gradient
+#### How to calculate gradient
 
 Suppose ▽l(β) is a vector whose ith entry is ith partial derivative evaluated at βi
 
 ![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/WX20210221-052700%402x.png)
 
+**Gradient Descent pseudocode**
 
+![pseudocode](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/pseudocode.png)
+
+    • Here l is the ”learning rate” and controls speed of convergence
+    • ▽l(β iter) is the gradient of L evaluated at iteration ”iter” with parameter of qiter
+    • Stop conditions can be different
+    
+   **When to stop**
+
+      Stop condition can be different, for example:
+        • Maximum number of iteration is reached (iter < MaxIteration)
+        • Gradient ▽l(β iter ) or parameters are not changing (||β(iter+1) - β(iter)|| < precisionValue)
+        • Cost is not decreasing (||l(β(iter+1)) - L(β(iter))|| < precisionValue)
+        • Combination of the above
+        
+**Gradient Descent calculation**
+
+In privious sessions, we got the MSE, which is 
+
+   ***l(β0,β1...) =1/n∑ i( f (xi) - yi)²***
+   
+then do expansion:
+
+   ***l(β0,β1...) =1/n∑ i( yi - (β0 + β1*x1+ β2*x2...+βd*xd))²***
+   
+Since it has mutiple dimensions,we compute partial derivatives:
+
+   
+   
+   
