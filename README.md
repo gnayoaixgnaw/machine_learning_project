@@ -1,4 +1,5 @@
-# machine learning
+# Machine Learning
+
 ***Explained machine learning models and projects based on ML***
 
 Basic Machine learning algorithms:
