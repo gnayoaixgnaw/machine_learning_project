@@ -5,13 +5,13 @@ Basic Machine learning algorithms:
 
 1.**Linear regression**
 
-2.Logistic regression
+2.**Logistic regression**
 
-3.Support Vector Machines
+3.**Support Vector Machines**
 
-4.Naive Bayes
+4.**Naive Bayes**
 
-(below coming soon...)
+*(below coming soon...)*
 
 5.Decision trees
 
