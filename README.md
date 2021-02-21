@@ -29,6 +29,7 @@ Basic machine learning algorithms:
 Linear regression is very simple and basic.First, linear regression is supervised model, which means data should be labelled.Then, for linear regression, it will find the relationships between features(x1,x2,x3....), which represent as coefficients of these variables.
 
 
+### simple linear regression
 
 
 Let's look at a simple linear regression equation: 
@@ -51,7 +52,7 @@ Then consider this data also as tuples of (1, 18), (2, 22), (3, 45), (4, 49), (5
 
 To minimize the amount of distance(errors), we need to find proper β1 and β0.We choose build a function :
 
-   ***l(β1,β0) =∑ i( f (xi) - yi)²***
+   ***l(β1,β0) =1/n∑ i( f (xi) - yi)²***
 
 which often referred to as a ***lost function***,.
 
@@ -62,7 +63,7 @@ which often referred to as a ***lost function***,.
         
 In this case, we choose **Mean Squared Error**.So when we want to fit a line to given data, we need to minimize the lost function.
 
-In this case, computing lost function:
+then, computing lost function:
 
         E(β1,β0) =1/n∑ i( f (xi) - yi)²
                  =1/n∑ i( β1*xi + β0 - yi)²
@@ -102,5 +103,19 @@ So loss minimized at m = 14.96.
 
 ### Optimization
 
+Now we have a polynomial linear regression:
 
+   ***y =β0 + β1x1 + β2x2 + ... + βdxd***
+
+Similarly, we get the lost function :
+
+   ***l(β0,β1...) =1/n∑ i( f (xi) - yi)²***
+So in order to minimize the cost function, we need to choose each βi to minimize l(β0,β1...),this is what we called ***Gradient Descent***.
+
+Gradient Descent is an iterative algorithm,Start from an initial guess and try to incrementally improve current solution,and at iteration step q(iter) is the current guess for βi.
+
+
+#### how to calculate gradient
+
+Suppose ▽l(β) is a vector whose ith entry is ith partial derivative evaluated at βi
 
