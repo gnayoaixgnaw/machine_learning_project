@@ -47,7 +47,7 @@ Then consider this data also as tuples of (1, 18), (2, 22), (3, 45), (4, 49), (5
 To minimize the amount of distance(errors), we need to find proper β1 and β0. In this case, we choose **least-squares fit**.
 Least-squares fit means, we build a function:
 
-***l(β1,β0) =∑ i( f (xi) - xi)**2***
+*** l(β1,β0) =∑ i( f (xi) - xi)² ***
 
 This function often referred to as a ***'lost function***.So when we want to fit a line to given data, we need to minimize the lost function: min l(β1,β0).
 
