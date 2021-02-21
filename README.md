@@ -156,5 +156,23 @@ Since it has mutiple dimensions,we compute partial derivatives:
 ![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/derivative.png)  
 
 
+Now we can compute components of the gradients and then sum them up and update weights in the next iteration.
 
+Here are more detailed pseudocode to compute gradient:
+
+    // initialize parameters
+    iteration = 0
+    learning Rate = 0.01
+    numIteration = X
+    theta = np.random.normal(0, 0.1, d)
+
+    while iteration < maxNumIteration:
+
+      calculate gradients
+      //update parameters
+      theta -= learning Rate*gradients
+      iteration+=1
+
+
+**Learning rate**
 
