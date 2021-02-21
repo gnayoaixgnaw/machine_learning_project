@@ -157,7 +157,7 @@ Since it has mutiple dimensions,we compute partial derivatives:
 
 
 Now we can compute components of the gradients and then sum them up and update weights in the next iteration.
-
+ 
 Here are more detailed pseudocode to compute gradient:
 
     // initialize parameters
