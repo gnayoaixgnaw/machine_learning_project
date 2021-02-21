@@ -120,3 +120,6 @@ Gradient Descent is an iterative algorithm,Start from an initial guess and try t
 
 Suppose ▽l(β) is a vector whose ith entry is ith partial derivative evaluated at βi
 
+![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/WX20210221-052700%402x.png)
+
+
