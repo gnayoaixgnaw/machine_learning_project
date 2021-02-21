@@ -150,6 +150,6 @@ then do expansion:
    
 Since it has mutiple dimensions,we compute partial derivatives:
 
-   
-   
+![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/derivative.png)
+
    
