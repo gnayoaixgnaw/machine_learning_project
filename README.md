@@ -30,3 +30,17 @@ Let's look at a simple linear regression equation:
 
 ***Y = β1X + β0 + e***
 
+▷ β1 is the coefficient of the independent variable (slope)
+
+▷ β0 is the constant term or the y intercept.
+
+▷ e is the error - the distance between actual value and model value
+
+Then consider this data also as tuples of (1, 18), (2, 22), (3, 45), (4, 49), (5, 86)
+
+• We might want to fit a straight line to the given data
+
+• Assume to fit a line with the equation Y = β1X + β0
+
+• Our goal is to minimize errors
+
