@@ -124,7 +124,7 @@ Suppose ▽l(β) is a vector whose ith entry is ith partial derivative evaluated
 
 **Gradient Descent pseudocode**
 
-![pseudocode](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/pseudocode.png)
+![pseudocode](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/pseudocode1.png)
 
     • Here l is the ”learning rate” and controls speed of convergence
     • ▽l(β iter) is the gradient of L evaluated at iteration ”iter” with parameter of qiter
