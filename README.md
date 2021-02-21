@@ -28,6 +28,9 @@ Basic machine learning algorithms:
 
 Linear regression is very simple and basic.First, linear regression is supervised model, which means data should be labelled.Then, for linear regression, it will find the relationships between features(x1,x2,x3....), which represent as coefficients of these variables.
 
+### simple linear regression
+
+
 Let's look at a simple linear regression equation: 
 
    ***Y = β1X + β0 + e***
@@ -69,7 +72,7 @@ In this case, computing lost function:
 Since cost function is a ”Convex” function, it means when its derivative is 0, the cost function hits bottom.
 So loss minimized at m = 14.96.
 
-### additional knowlage in lost function
+#### additional knowlage in lost function
 We will always face **over-fitting issue** in real problem. **over-fitting issue** is that the parameters of model are large and model's rebustness is poor, which means a little change of test data may cause a huge difference in result.So in order to aviod over-fitting,
 
 first we need to remove parameters which have little contribution and generate sparse matrix, that is, the l1 norm( mean absolute error):
@@ -93,6 +96,8 @@ we can visualize l2 lost function：
 ![l2](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
 
 In comparison with the iterative formula without adding L2 regularization, parameters are multiplied by a factor less than 1 in each iteration, which makes parameters decrease continuously. Therefore, in general, parameters decreasing continuously.
+
+### Optimization
 
 
 
