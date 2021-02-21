@@ -72,7 +72,7 @@ In this case, computing lost function:
 Since cost function is a ”Convex” function, it means when its derivative is 0, the cost function hits bottom.
 So loss minimized at m = 14.96.
 
->additional knowlage in lost function
+>Regulation in lost function
 >
 >We will always face **over-fitting issue** in real problem. **over-fitting issue** is that the parameters of model are large and model's rebustness is poor, which means a little change of test data may cause a huge difference in result.So in order to aviod over-fitting,
 >
@@ -82,7 +82,7 @@ So loss minimized at m = 14.96.
 
 >>   ***l1 = l + α∑ i|βi|***
    
-    >>where l is lost function, ∑ i|βi| is l1 regularizers, α is regularization coefficient, βi is parameters.
+    where l is lost function, ∑ i|βi| is l1 regularizers, α is regularization coefficient, βi is parameters.
 >>we can visualize l1 lost function：
 
 >>![l1](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
@@ -93,7 +93,7 @@ So loss minimized at m = 14.96.
 
    >>***l2 = l + α(∑ i|βi|²)^1/2*** 
     
-    >>where l is lost function, (∑ i|βi|²)^1/2 is l2 regularizers, α is regularization coefficient, βi is parameters.
+    where l is lost function, (∑ i|βi|²)^1/2 is l2 regularizers, α is regularization coefficient, βi is parameters.
 >>we can visualize l2 lost function：
 
 >>![l2](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
