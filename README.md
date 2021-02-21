@@ -140,15 +140,21 @@ Suppose ▽l(β) is a vector whose ith entry is ith partial derivative evaluated
         
 **Gradient Descent calculation**
 
-In privious sessions, we got the MSE, which is 
+In privious sessions, we got the MSE, which is   
+  
 
    ***l(β0,β1...) =1/n∑ i( f (xi) - yi)²***
    
-then do expansion:
+then do expansion:  
+  
 
    ***l(β0,β1...) =1/n∑ i( yi - (β0 + β1*x1+ β2*x2...+βd*xd))²***
+  
    
 Since it has mutiple dimensions,we compute partial derivatives:
 
-![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/derivative.png)
+![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/derivative.png)  
+
+
+
 
