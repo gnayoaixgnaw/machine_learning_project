@@ -334,6 +334,30 @@ for IMDB:
 ![imbd](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/imbd.png) 
 
 
+### Now I will share a kaggle project based on ML:
+
+***kaggel link :***
+
+https://www.kaggle.com/uciml/mushroom-classification
+
+
+This project is mushroom classification. There are about 2 categories (edible or poisonous) and 8124 records (52% edible and 48% poisonous).
+For this project, I have tried three machine learning models:
+SVM , Random forest and logistic regression. 
+All three models have good performances:
+Compare recall, precision, f1-score for both class
+F1_score > 95%
+Accuracy > 95%
+
+This dataset includes descriptions of hypothetical samples corresponding to 23 species of gilled mushrooms in the Agaricus 
+and Lepiota Family Mushroom drawn from The Audubon Society Field Guide to North American Mushrooms (1981). 
+Each species is identified as definitely edible, definitely poisonous, or of unknown edibility and not recommended. 
+This latter class was combined with the poisonous one. The Guide clearly states that there is no simple rule for determining the edibility of a mushroom; 
+no rule like "leaflets three, let it be'' for Poisonous Oak and Ivy.
+
+***Code***
+
+Check [here](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/mashroom/cs677project.ipynb)
 
 
 
