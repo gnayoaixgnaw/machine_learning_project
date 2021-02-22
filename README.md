@@ -34,11 +34,11 @@ Linear regression is very simple and basic.First, linear regression is supervise
 
 Let's look at a simple linear regression equation: 
 
-   ***Y = β1X + β0 + e***
+   ***Y = θ1X + θ0 + e***
 
-    ▷ β1 is the coefficient of the independent variable (slope)
+    ▷ θ1 is the coefficient of the independent variable (slope)
 
-    ▷ β0 is the constant term or the y intercept.
+    ▷ θ0 is the constant term or the y intercept.
 
     ▷ e is the error - the distance between actual value and model value
 
@@ -46,13 +46,13 @@ Then consider this data also as tuples of (1, 18), (2, 22), (3, 45), (4, 49), (5
 
     • We might want to fit a straight line to the given data
 
-    • Assume to fit a line with the equation Y = β1X + β0
+    • Assume to fit a line with the equation Y = θ1X + θ0
 
     • Our goal is to minimize errors
 
-To minimize the amount of distance(errors), we need to find proper β1 and β0.We choose build a function :
+To minimize the amount of distance(errors), we need to find proper θ1 and θ0.We choose build a function :
 
-   ***l(β1,β0) =1/n∑ i( f (xi) - yi)²***
+   ***l(θ1,θ0) =1/n∑ i( f (xi) - yi)²***
 
 which often referred to as a ***lost function***,.
 
@@ -65,9 +65,9 @@ In this case, we choose **Mean Squared Error**.So when we want to fit a line to 
 
 then, computing lost function:
 
-        E(β1,β0) =1/n∑ i( f (xi) - yi)²
-                 =1/n∑ i( β1*xi + β0 - yi)²
-        l'(β1,β0)=1/n∑ i 2*( β1*xi² - xi*yi)
+        E(θ1,θ0) =1/n∑ i( f (xi) - yi)²
+                 =1/n∑ i( θ1*xi + θ0 - yi)²
+        l'(θ1,θ0)=1/n∑ i 2*( θ1*xi² - xi*yi)
                  =2/n*(2m(1 + 4 + 9 + 16 + 25) - 2(18 + 44 + 135 + 196 + 430))
                  = 2/5*(110m - 1646)
 Since cost function is a ”Convex” function, it means when its derivative is 0, the cost function hits bottom.
@@ -81,9 +81,9 @@ So loss minimized at m = 14.96.
 >
 >first we need to remove parameters which have little contribution and generate sparse matrix, that is, the l1 norm( mean absolute error):
 
->***l1 = l + α∑ i|βi|***
+>***l1 = l + α∑ i|θi|***
    
-    	where l is lost function, ∑ i|βi| is l1 regularizers, α is regularization coefficient, βi is parameters.
+    	where l is lost function, ∑ i|θi| is l1 regularizers, α is regularization coefficient, θi is parameters.
 >we can visualize l1 lost function：
 
 >![l1](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
@@ -92,9 +92,9 @@ So loss minimized at m = 14.96.
 
 >Secondly, we can make parameters as little as possible by implement l2 norm:
 
-   >***l2 = l + α(∑ i|βi|²)^1/2*** 
+   >***l2 = l + α(∑ i|θi|²)^1/2*** 
     
-    	where l is lost function, (∑ i|βi|²)^1/2 is l2 regularizers, α is regularization coefficient, βi is parameters.
+    	where l is lost function, (∑ i|θi|²)^1/2 is l2 regularizers, α is regularization coefficient, θi is parameters.
 >we can visualize l2 lost function：
 
 >![l2](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
@@ -104,15 +104,15 @@ So loss minimized at m = 14.96.
 
 Now we have a polynomial linear regression:
 
-   ***y =β0 + β1x1 + β2x2 + ... + βdxd***
+   ***y =θ0 + θ1x1 + θ2x2 + ... + θdxd***
 
 Similarly, we get the lost function :
 
-   ***l(β0,β1...) =1/n∑ i( f (xi) - yi)²***
+   ***l(θ0,θ1...) =1/n∑ i( f (xi) - yi)²***
    
-So in order to minimize the cost function, we need to choose each βi to minimize l(β0,β1...),this is what we called ***Gradient Descent***.
+So in order to minimize the cost function, we need to choose each θi to minimize l(θ0,θ1...),this is what we called ***Gradient Descent***.
 
-Gradient Descent is an iterative algorithm,Start from an initial guess and try to incrementally improve current solution,and at iteration step q(iter) is the current guess for βi.
+Gradient Descent is an iterative algorithm,Start from an initial guess and try to incrementally improve current solution,and at iteration step θ(iter) is the current guess for θi.
 
 
 #### How to calculate gradient
@@ -126,7 +126,7 @@ Suppose ▽l(θ) is a vector whose ith entry is ith partial derivative evaluated
 ![pseudocode](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/pseudocode1.png)
 
     • Here l is the ”learning rate” and controls speed of convergence
-    • ▽l(β iter) is the gradient of L evaluated at iteration ”iter” with parameter of qiter
+    • ▽l(θ iter) is the gradient of L evaluated at iteration ”iter” with parameter of qiter
     • Stop conditions can be different
     
    **When to stop**
