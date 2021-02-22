@@ -81,9 +81,9 @@ So loss minimized at m = 14.96.
 >
 >first we need to remove parameters which have little contribution and generate sparse matrix, that is, the l1 norm( mean absolute error):
 
->   ***l1 = l + α∑ i|βi|***
+>***l1 = l + α∑ i|βi|***
    
-    where l is lost function, ∑ i|βi| is l1 regularizers, α is regularization coefficient, βi is parameters.
+    	where l is lost function, ∑ i|βi| is l1 regularizers, α is regularization coefficient, βi is parameters.
 >we can visualize l1 lost function：
 
 >![l1](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
