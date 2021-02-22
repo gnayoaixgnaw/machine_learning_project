@@ -189,7 +189,7 @@ large learning rate:
 
 So how to find a proper learning rate? If we set lr a large value, the function will converge very fast at beginning but may miss the optimal solution,but if we set a small value, it will cost too much time to converge.
 
->Here I choose a standard method, which name is ***Bold Driver*** to change learning rate dynamicly:
+>Here I choose a very simple method, which name is ***Bold Driver*** to change learning rate dynamicly:
 >
 >At each iteration, compute the cost l(β0,β1...)
 >
@@ -206,6 +206,29 @@ So how to find a proper learning rate? If we set lr a large value, the function 
 This graph illustrate the advantages of adaptive lr vs constant lr:
 
 ![different](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/adaptivelr.png) 
+
+
+#### Optimizer
+
+Variations of Gradient Descent depends on size of data that be used in each iteration:
+
+      • Full Batch Gradient Descent (Using the whole data set (size n))
+      • Stochastic Gradient Descent (SGD) (Using one sample per iteration (size 1))
+      • Mini Batch Gradient Descent (Using a mini batch of data (size m < n))
+
+**BGD** has a disadvantage: In each iteration, as it calculates gradients from whole dataset, this process will take lots of time.BGD can't overcome local minimum problem, because we can not add new data to trainning dataset.In other word, when function comes to local minimum point, full batch gradient will be 0, which means optimization process will stop.
+
+**SGD** is always used in online situation for its speed.But since SGD uses only one sample in each iteration, the gradient can be affacted by noisy point, causeing a fact that function may not converge to optimal solution.
+
+**MSGD** finds a trade-off between SGD and BGD.Different from BGD and SGD, MSGD only pick a small batch-size of data in each iteration, which not only minimized the impact from noisy point, but also reduced trainning time and increased the accuracy.
+
+As iterations going on, we hope that learning rate becomes smaller.Because when function close to optimal solution, the changing step should be small to find best solution.So we need to gradually change learning rate.Also, we know that the weights for each coefficent is different, which means gradients of some coefficents are large while some are little.So in traditional SGD, changes of coefficents are not synchronous.So we need to distribute the coefficents which has large changes a small leanrning rate.
+
+To deal with this issue, we can use **Adagrad(adaptive gradient algorithm)**
+
+Adagrad will give each coefficent a proper learning rate:
+
+![adagrad](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/adagrad.png) 
 
 
 
