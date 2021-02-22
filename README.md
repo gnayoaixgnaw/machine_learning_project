@@ -117,7 +117,7 @@ Gradient Descent is an iterative algorithm,Start from an initial guess and try t
 
 #### How to calculate gradient
 
-Suppose ▽l(β) is a vector whose ith entry is ith partial derivative evaluated at βi
+Suppose ▽l(θ) is a vector whose ith entry is ith partial derivative evaluated at θi
 
 ![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/derivative1.png)
 
@@ -142,12 +142,12 @@ Suppose ▽l(β) is a vector whose ith entry is ith partial derivative evaluated
 In privious sessions, we got the loss function, which is   
   
 
-   ***l(β0,β1...) =1/n∑ i( f (xi) - yi)²***
+   ***l(θ0,θ1...) =1/n∑ i( f (xi) - yi)²***
    
 then do expansion:  
   
 
-   ***l(β0,β1...) =1/n∑ i( yi - (β0 + β1x1+ β2x2...+βdxd))²***
+   ***l(θ0,θ1...) =1/n∑ i( yi - (θ0 + θ1x1+ θ2x2...+θdxd))²***
   
    
 Since it has mutiple dimensions,we compute partial derivatives:
