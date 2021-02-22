@@ -228,7 +228,7 @@ To deal with this issue, we can use **Adagrad(adaptive gradient algorithm)**
 
 Adagrad will give each coefficent a proper learning rate:
 
-![adagrad](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/adagrad.png) 
+![adagrad](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/adagrad1.png) 
 
 
 
