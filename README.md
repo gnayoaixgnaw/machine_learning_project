@@ -92,9 +92,9 @@ So loss minimized at m = 14.96.
 
 >Secondly, we can make parameters as little as possible by implement l2 norm:
 
-   >>***l2 = l + α(∑ i|βi|²)^1/2*** 
+   >***l2 = l + α(∑ i|βi|²)^1/2*** 
     
-    where l is lost function, (∑ i|βi|²)^1/2 is l2 regularizers, α is regularization coefficient, βi is parameters.
+    	where l is lost function, (∑ i|βi|²)^1/2 is l2 regularizers, α is regularization coefficient, βi is parameters.
 >we can visualize l2 lost function：
 
 >![l2](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
@@ -139,7 +139,7 @@ Suppose ▽l(β) is a vector whose ith entry is ith partial derivative evaluated
         
 **Gradient Descent calculation**
 
-In privious sessions, we got the MSE, which is   
+In privious sessions, we got the loss function, which is   
   
 
    ***l(β0,β1...) =1/n∑ i( f (xi) - yi)²***
