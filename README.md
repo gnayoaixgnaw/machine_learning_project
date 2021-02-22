@@ -230,5 +230,60 @@ Adagrad will give each coefficent a proper learning rate:
 
 ![adagrad](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/adagrad1.png) 
 
+    w : coefficents
+    
+    ∂l/∂w : gradient
+    
+    η: learning rate 
+    
+    h: sum of squares of all the previous gradients
 
+when updating coefficent, we can adjust the scale by mutiplying 1/√h.
+
+But as iteration going on, h will be very large, making updating step becomes very small. 
+
+**RMSProp** can optimize this problem.RMSProp uses an exponential weighted average to eliminate swings in gradient descent: a larger derivative of a dimension means a larger exponential weighted average, and a smaller derivative means a smaller exponential weighted average. This ensures that the derivatives of each dimension are of the same order of magnitude, thus reducing swings:
+
+    calculate gradient: 
+      dwi = ∂L(w)/∂wi
+    update h (add weight β, dropped parts of hwi)
+      hwi =β * hwi + (1-β)*(dwi)²
+    update wi (√hwi can be 0 some times, so we add a small value c to √hwi)
+      wi = wi - η/(√hwi +c) * dwi 
+***RMSProp code here***
+
+'''
+def RMSprop(x, y, step=0.01, iter_count=500, batch_size=4, alpha=0.9, beta=0.9):
+    length, features = x.shape
+    data = np.column_stack((x, np.ones((length, 1))))
+    w = np.zeros((features + 1, 1))
+    Sdw, v, eta = 0, 0, 10e-7
+    start, end = 0, batch_size
+    
+    # 开始迭代
+    for i in range(iter_count):
+        # 计算临时更新参数
+        w_temp = w - step * v
+        
+        # 计算梯度
+        dw = np.sum((np.dot(data[start:end], w_temp) - y[start:end]) * data[start:end], axis=0).reshape((features + 1, 1)) / length        
+        
+        # 计算累积梯度平方
+        Sdw = beta * Sdw + (1 - beta) * np.dot(dw.T, dw)
+        
+        # 计算速度更新量、
+        v = alpha * v + (1 - alpha) * dw
+        
+        # 更新参数
+        w = w - (step / np.sqrt(eta + Sdw)) * v
+        start = (start + batch_size) % length
+        if start > length:
+            start -= length
+        end = (end + batch_size) % length
+        if end > length:
+            end -= length
+    return w
+'''
+	
+ 
 
