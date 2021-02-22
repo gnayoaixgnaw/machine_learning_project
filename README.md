@@ -26,7 +26,7 @@ Basic machine learning algorithms:
 
 ## Linear regression
 
-Linear regression is very simple and basic.First, linear regression is supervised model, which means data should be labelled.Then, for linear regression, it will find the relationships between features(x1,x2,x3....), which represent as coefficients of these variables.
+Linear regression is very simple and basic.First, linear regression is supervised model, which means data should be labelled.Linear regression will find the relationships between features(x1,x2,x3....), which represent as coefficients of these variables.
 
 
 ### simple linear regression
@@ -34,15 +34,14 @@ Linear regression is very simple and basic.First, linear regression is supervise
 
 Let's look at a simple linear regression equation: 
 
-   ***Y = θ1X + θ0 + e***
+   ***Y = θ1X + θ0 ***
 
     ▷ θ1 is the coefficient of the independent variable (slope)
 
     ▷ θ0 is the constant term or the y intercept.
 
-    ▷ e is the error - the distance between actual value and model value
 
-Then consider this data also as tuples of (1, 18), (2, 22), (3, 45), (4, 49), (5, 86)
+Then consider this dataset as tuples of (1, 18), (2, 22), (3, 45), (4, 49), (5, 86)
 
     • We might want to fit a straight line to the given data
 
@@ -50,16 +49,16 @@ Then consider this data also as tuples of (1, 18), (2, 22), (3, 45), (4, 49), (5
 
     • Our goal is to minimize errors
 
-To minimize the amount of distance(errors), we need to find proper θ1 and θ0.We choose build a function :
+To minimize the amount of distance(errors), we need to find proper θ1 and θ0.We build a function :
 
    ***l(θ1,θ0) =1/n ∑ i( f (Xi) - Yi)²***
 
 which often referred to as a ***lost function***,.
 
-        lost function has three common formula:
-            (1)MSE(Mean Squared Error)
-            (2)RMSE(Root Mean Squared Error)
-            (3)Logloss(Cross Entorpy loss) 
+	lost function has three common formula:
+	    (1)MSE(Mean Squared Error)
+	    (2)RMSE(Root Mean Squared Error)
+	    (3)Logloss(Cross Entorpy loss) 
         
 In this case, we choose **Mean Squared Error**.So when we want to fit a line to given data, we need to minimize the lost function.
 
@@ -70,37 +69,8 @@ then, computing lost function:
         l'(θ1,θ0)=1/n∑ i 2*( θ1*Xi² - Xi*Yi)
                  =2/n*(2m(1 + 4 + 9 + 16 + 25) - 2(18 + 44 + 135 + 196 + 430))
                  = 2/5*(110m - 1646)
-Since cost function is a ”Convex” function, it means when its derivative is 0, the cost function hits bottom.
+Since cost function is a ”Convex” function, when its derivative is 0, the cost function hits bottom.
 So loss minimized at m = 14.96.
-
->Regulation in lost function
->
->We will always face **over-fitting issue** in real problem. **over-fitting issue** is that the parameters of model are large and model's rebustness is poor, which means a little change of test data may cause a huge difference in result.So in order to aviod over-fitting,
->
->
->
->first we need to remove parameters which have little contribution and generate sparse matrix, that is, the l1 norm( mean absolute error):
-
->***l1 = l + α∑ i|θi|***
-   
-    	where l is lost function, ∑ i|θi| is l1 regularizers, α is regularization coefficient, θi is parameters.
->we can visualize l1 lost function：
-
->![l1](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
-
->The contour line in the figure is that of l, and the black square is the graph of L1 function. The place where the contour line of l intersects the graph of L1 for the first time is the optimal solution. It is easy to find that the black square must intersect the contour line at the vertex of the square first. l is much more likely to contact those angles than it is to contact any other part. Some dimensions of these points are 0 which will make some features equal to 0 and generate a sparse matrix, which can then be used for feature selection.
-
->Secondly, we can make parameters as little as possible by implement l2 norm:
-
-   >***l2 = l + α(∑ i|θi|^2)^1/2*** 
-    
-    	where l is lost function, (∑ i|θi|²)^1/2 is l2 regularizers, α is regularization coefficient, θi is parameters.
->we can visualize l2 lost function：
-
->![l2](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
-
->In comparison with the iterative formula without adding L2 regularization, parameters are multiplied by a factor less than 1 in each iteration, which makes parameters decrease continuously. Therefore, in general, parameters decreasing continuously.
-
 
 Now we have a polynomial linear regression:
 
@@ -241,6 +211,45 @@ Suppose Rj is jth partial derivative evaluated at Rj:
 ## Support victor machine
 (working on it......)
 
+
+## Regulation in lost function
+
+We will always face **over-fitting issue** in real problem. **over-fitting issue** is that the parameters of model are large and model's rebustness is poor, which means a little change of test data may cause a huge difference in result.So in order to aviod over-fitting,
+
+### l1 norm
+
+We need to remove parameters which have little contribution and generate sparse matrix, that is, the l1 norm( mean absolute error):
+
+***l1 = l + α∑ i|θi|***
+   
+    	where l is lost function, ∑ i|θi| is l1 regularizers, α is regularization coefficient, θi is parameters.
+we can visualize l1 lost function：
+
+![l1](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
+
+The contour line in the figure is that of l, and the black square is the graph of L1 function. The place where the contour line of l intersects the graph of L1 for the first time is the optimal solution. It is easy to find that the black square must intersect the contour line at the vertex of the square first. l is much more likely to contact those angles than it is to contact any other part. Some dimensions of these points are 0 which will make some features equal to 0 and generate a sparse matrix, which can then be used for feature selection.
+
+### l2 norm
+
+We can make parameters as little as possible by implement l2 norm:
+
+   ***l2 = l + α(∑ i|θi|^2)^1/2*** 
+    
+    	where l is lost function, (∑ i|θi|²)^1/2 is l2 regularizers, α is regularization coefficient, θi is parameters.
+we can visualize l2 lost function：
+
+![l2](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
+
+In comparison with the iterative formula without adding L2 regularization, parameters are multiplied by a factor less than 1 in each iteration, which makes parameters decrease continuously. Therefore, in general, parameters decreasing continuously.
+
+### ln norm 
+
+ln norm is a general formula in norm:
+
+   ***ln = l + α(∑ i|θi|^n)^1/n*** 
+   
+   	when n = 1 it is l1 norm, n =2 it is l2 norm
+	
 
 
 ## Optimizer
