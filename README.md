@@ -101,7 +101,6 @@ So loss minimized at m = 14.96.
 
 >In comparison with the iterative formula without adding L2 regularization, parameters are multiplied by a factor less than 1 in each iteration, which makes parameters decrease continuously. Therefore, in general, parameters decreasing continuously.
 
-###Gradient
 
 Now we have a polynomial linear regression:
 
