@@ -78,7 +78,7 @@ Now we have a polynomial linear regression:
 
 Similarly, we get the lost function :
 
-   ***l(θ0,θ1...) =1/n∑ i( f (Xi) - Yi)²***
+   ***l(θ0,θ1...) =1/n∑ i( f (X1,X2...Xd) - Yi)²***
    
 So in order to minimize the cost function, we need to choose each θi to minimize l(θ0,θ1...),this is what we called ***Gradient Descent***.
 
