@@ -142,12 +142,12 @@ Suppose ▽l(β) is a vector whose ith entry is ith partial derivative evaluated
 In privious sessions, we got the loss function, which is   
   
 
-   ***l(β0,β1...) =1/n∑ i( f (xi) - yi)²***
+  ***l(β0,β1...) =1/n∑ i( f (xi) - yi)²***
    
 then do expansion:  
   
 
-   ***l(β0,β1...) =1/n∑ i( yi - (β0 + β1*x1+ β2*x2...+βd*xd))²***
+  ***l(β0,β1...) =1/n∑ i( yi - (β0 + β1*x1+ β2*x2...+βd*xd))²***
   
    
 Since it has mutiple dimensions,we compute partial derivatives:
