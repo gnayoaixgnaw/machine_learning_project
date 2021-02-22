@@ -101,7 +101,7 @@ So loss minimized at m = 14.96.
 
 >In comparison with the iterative formula without adding L2 regularization, parameters are multiplied by a factor less than 1 in each iteration, which makes parameters decrease continuously. Therefore, in general, parameters decreasing continuously.
 
-### Optimization
+###Gradient
 
 Now we have a polynomial linear regression:
 
@@ -174,7 +174,87 @@ Here are more detailed pseudocode to compute gradient:
       iteration+=1
 
 
-**Learning rate**
+
+## Logistic regression
+
+Logistic regression is supervised model especially for prediction problem.Suppose we have a prediction problem.It is natural to assume that output y given the independent variable(s) X and model parameter θ is sampled from the exponential family.
+
+The parameter θ is linearly related to X that is, assuming X is vector-valued
+
+***θ = ∑j xjrj***
+
+     where r is regression coefficent.
+
+Then I implement Log-likelihood, written as:
+
+***LLH(r1, r2, ..., rd|x1, x2, ..., xn, y1, y2, ..., yn) = ∑i (logb(yi) + θiT(y) - f(θi))***
+
+
+Given a bunch of data for example,suppose output Y has (0/1):
+
+	(92, 12), (23, 67), (67, 92), (98, 78), (18, 45), (6, 100)
+
+	Final Result in class: 0, 0, 1, 1, 0, 0
+
+	• If coefs are (-1, -1), LLH is -698
+	• If coefs are (1, -1), LLH is -133
+	• If coefs are (-1, 1), LLH is 7.4
+	• If coefs are (1, 1), LLH is 394
+	
+Now simplify this formula:
+
+***LLH = ∑i (yiθi - log(1+e^θi))***
+
+     where θi = ∑jrj*x(i,j),i means ith entity,j means entity's ith dimension.
+
+	
+So now I can calculate loss function.As gradient descent need to minimize loss function,the loss function should be negative LLH:
+
+***loss function = ∑i (-yiθi + log(1+e^θi))***
+
+
+Appling regularization (l2 norm):
+
+***loss function = ∑i (-yiθi + log(1+e^θi)) + λ∑jrj^2***
+
+
+#### How to calculate gradient
+
+Suppose rj is jth partial derivative evaluated at rj:
+
+![derivative2](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/derivative2.png)
+
+**Gradient Descent pseudocode in Pyspark**
+
+![pseudocode1](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/pseudocode2.png)
+
+
+#### Implement via Pyspark 
+
+***Check [here](https://github.com/gnayoaixgnaw/Big_Data_Analytics/tree/main/assignment4)***
+
+
+## Support victor machine
+(working on it......)
+
+
+
+## Optimizer
+
+
+Variations of Gradient Descent depends on size of data that be used in each iteration:
+
+      • Full Batch Gradient Descent (Using the whole data set (size n))
+      • Stochastic Gradient Descent (SGD) (Using one sample per iteration (size 1))
+      • Mini Batch Gradient Descent (Using a mini batch of data (size m < n))
+
+**BGD** has a disadvantage: In each iteration, as it calculates gradients from whole dataset, this process will take lots of time.BGD can't overcome local minimum problem, because we can not add new data to trainning dataset.In other word, when function comes to local minimum point, full batch gradient will be 0, which means optimization process will stop.
+
+**SGD** is always used in online situation for its speed.But since SGD uses only one sample in each iteration, the gradient can be affacted by noisy point, causeing a fact that function may not converge to optimal solution.
+
+**MSGD** finds a trade-off between SGD and BGD.Different from BGD and SGD, MSGD only pick a small batch-size of data in each iteration, which not only minimized the impact from noisy point, but also reduced trainning time and increased the accuracy.
+
+### Learning rate 
 
 The learning rate is a vital parameter in gradient descent as learning rate is responsible for convergence, if lr is small, convergent speed will be slow, on the contrary,when lr is large, function will converge very fast.
 
@@ -208,19 +288,6 @@ This graph illustrate the advantages of adaptive lr vs constant lr:
 ![different](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/adaptivelr.png) 
 
 
-#### Optimizer
-
-Variations of Gradient Descent depends on size of data that be used in each iteration:
-
-      • Full Batch Gradient Descent (Using the whole data set (size n))
-      • Stochastic Gradient Descent (SGD) (Using one sample per iteration (size 1))
-      • Mini Batch Gradient Descent (Using a mini batch of data (size m < n))
-
-**BGD** has a disadvantage: In each iteration, as it calculates gradients from whole dataset, this process will take lots of time.BGD can't overcome local minimum problem, because we can not add new data to trainning dataset.In other word, when function comes to local minimum point, full batch gradient will be 0, which means optimization process will stop.
-
-**SGD** is always used in online situation for its speed.But since SGD uses only one sample in each iteration, the gradient can be affacted by noisy point, causeing a fact that function may not converge to optimal solution.
-
-**MSGD** finds a trade-off between SGD and BGD.Different from BGD and SGD, MSGD only pick a small batch-size of data in each iteration, which not only minimized the impact from noisy point, but also reduced trainning time and increased the accuracy.
 
 As iterations going on, we hope that learning rate becomes smaller.Because when function close to optimal solution, the changing step should be small to find best solution.So we need to gradually change learning rate.Also, we know that the weights for each coefficent is different, which means gradients of some coefficents are large while some are little.So in traditional SGD, changes of coefficents are not synchronous.So we need to distribute the coefficents which has large changes a small leanrning rate.
 
