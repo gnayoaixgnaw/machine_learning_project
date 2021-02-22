@@ -252,7 +252,7 @@ But as iteration going on, h will be very large, making updating step becomes ve
       wi = wi - η/(√hwi +c) * dwi 
 ***RMSProp code here***
 
-'''
+···
 def RMSprop(x, y, step=0.01, iter_count=500, batch_size=4, alpha=0.9, beta=0.9):
     length, features = x.shape
     data = np.column_stack((x, np.ones((length, 1))))
@@ -283,7 +283,7 @@ def RMSprop(x, y, step=0.01, iter_count=500, batch_size=4, alpha=0.9, beta=0.9):
         if end > length:
             end -= length
     return w
-'''
+···
 	
  
 
