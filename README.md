@@ -52,7 +52,7 @@ Then consider this data also as tuples of (1, 18), (2, 22), (3, 45), (4, 49), (5
 
 To minimize the amount of distance(errors), we need to find proper θ1 and θ0.We choose build a function :
 
-   ***l(θ1,θ0) =1/n∑ i( f (xi) - yi)²***
+   ***l(θ1,θ0) =1/n ∑ i( f (Xi) - Yi)²***
 
 which often referred to as a ***lost function***,.
 
@@ -65,9 +65,9 @@ In this case, we choose **Mean Squared Error**.So when we want to fit a line to 
 
 then, computing lost function:
 
-        E(θ1,θ0) =1/n∑ i( f (xi) - yi)²
-                 =1/n∑ i( θ1*xi + θ0 - yi)²
-        l'(θ1,θ0)=1/n∑ i 2*( θ1*xi² - xi*yi)
+        E(θ1,θ0) =1/n∑ i( f (Xi) - Yi)²
+                 =1/n∑ i( θ1*Xi + θ0 - Yi)²
+        l'(θ1,θ0)=1/n∑ i 2*( θ1*Xi² - Xi*Yi)
                  =2/n*(2m(1 + 4 + 9 + 16 + 25) - 2(18 + 44 + 135 + 196 + 430))
                  = 2/5*(110m - 1646)
 Since cost function is a ”Convex” function, it means when its derivative is 0, the cost function hits bottom.
@@ -92,7 +92,7 @@ So loss minimized at m = 14.96.
 
 >Secondly, we can make parameters as little as possible by implement l2 norm:
 
-   >***l2 = l + α(∑ i|θi|²)^1/2*** 
+   >***l2 = l + α(∑ i|θi|^2)^1/2*** 
     
     	where l is lost function, (∑ i|θi|²)^1/2 is l2 regularizers, α is regularization coefficient, θi is parameters.
 >we can visualize l2 lost function：
@@ -104,11 +104,11 @@ So loss minimized at m = 14.96.
 
 Now we have a polynomial linear regression:
 
-   ***y =θ0 + θ1x1 + θ2x2 + ... + θdxd***
+   ***Y =θ0 + θ1X1 + θ2X2 + ... + θdXd***
 
 Similarly, we get the lost function :
 
-   ***l(θ0,θ1...) =1/n∑ i( f (xi) - yi)²***
+   ***l(θ0,θ1...) =1/n∑ i( f (Xi) - Yi)²***
    
 So in order to minimize the cost function, we need to choose each θi to minimize l(θ0,θ1...),this is what we called ***Gradient Descent***.
 
@@ -133,8 +133,8 @@ Suppose ▽l(θ) is a vector whose ith entry is ith partial derivative evaluated
 
       Stop condition can be different, for example:
         • Maximum number of iteration is reached (iter < MaxIteration)
-        • Gradient ▽l(β iter ) or parameters are not changing (||β(iter+1) - β(iter)|| < precisionValue)
-        • Cost is not decreasing (||l(β(iter+1)) - L(β(iter))|| < precisionValue)
+        • Gradient ▽l(θ iter ) or parameters are not changing (||θ(iter+1) - θ(iter)|| < precisionValue)
+        • Cost is not decreasing (||l(θ(iter+1)) - L(θ(iter))|| < precisionValue)
         • Combination of the above
         
 **Gradient Descent calculation**
@@ -142,12 +142,12 @@ Suppose ▽l(θ) is a vector whose ith entry is ith partial derivative evaluated
 In privious sessions, we got the loss function, which is   
   
 
-   ***l(θ0,θ1...) =1/n∑ i( f (xi) - yi)²***
+   ***l(θ0,θ1...) =1/n∑ i( f (Xi) - Yi)²***
    
 then do expansion:  
   
 
-   ***l(θ0,θ1...) =1/n∑ i( yi - (θ0 + θ1x1+ θ2x2...+θdxd))²***
+   ***l(θ0,θ1...) =1/n∑ i( Yi - (θ0 + θ1X1+ θ2X2...+θdXd))²***
   
    
 Since it has mutiple dimensions,we compute partial derivatives:
@@ -180,13 +180,13 @@ Logistic regression is supervised model especially for prediction problem.Suppos
 
 The parameter θ is linearly related to X that is, assuming X is vector-valued
 
-***θ = ∑j xjrj***
+***θ = ∑j XjRj***
 
      where r is regression coefficent.
 
 Then I implement Log-likelihood, written as:
 
-***LLH(r1, r2, ..., rd|x1, x2, ..., xn, y1, y2, ..., yn) = ∑i (logb(yi) + θiT(y) - f(θi))***
+***LLH(R1, R2, ..., Rd|x1, x2, ..., xn, y1, y2, ..., yn) = ∑i (logb(Yi) + θiT(Y) - f(θi))***
 
 
 Given a bunch of data for example,suppose output Y has (0/1):
@@ -202,24 +202,24 @@ Given a bunch of data for example,suppose output Y has (0/1):
 	
 Now simplify this formula:
 
-***LLH = ∑i (yiθi - log(1+e^θi))***
+***LLH = ∑i (Yiθi - log(1+e^θi))***
 
-     where θi = ∑jrj*x(i,j),i means ith entity,j means entity's ith dimension.
+     where θi = ∑j Rj*Xi,j ,i means ith entity,j means entity's ith dimension.
 
 	
 So now I can calculate loss function.As gradient descent need to minimize loss function,the loss function should be negative LLH:
 
-***loss function = ∑i (-yiθi + log(1+e^θi))***
+***loss function = ∑i (-Yiθi + log(1+e^θi))***
 
 
 Appling regularization (l2 norm):
 
-***loss function = ∑i (-yiθi + log(1+e^θi)) + λ∑jrj^2***
+***loss function = ∑i (-Yiθi + log(1+e^θi)) + λ∑j Rj^2***
 
 
 #### How to calculate gradient
 
-Suppose rj is jth partial derivative evaluated at rj:
+Suppose Rj is jth partial derivative evaluated at Rj:
 
 ![derivative2](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/derivative2.png)
 
@@ -228,7 +228,7 @@ Suppose rj is jth partial derivative evaluated at rj:
 ![pseudocode1](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/pseudocode2.png)
 
 
-#### Implement via Pyspark 
+#### Implement code via Pyspark 
 
 ***Check [here](https://github.com/gnayoaixgnaw/Big_Data_Analytics/tree/main/assignment4)***
 
@@ -270,7 +270,7 @@ So how to find a proper learning rate? If we set lr a large value, the function 
 
 >Here I choose a very simple method, which name is ***Bold Driver*** to change learning rate dynamicly:
 >
->At each iteration, compute the cost l(β0,β1...)
+>At each iteration, compute the cost l(θ0,θ1...)
 >
 >Better than last time? 
 >
