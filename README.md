@@ -357,7 +357,7 @@ no rule like "leaflets three, let it be'' for Poisonous Oak and Ivy.
 
 ***Code***
 
-##### Check [here](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/mashroom/cs677project.ipynb)
+#### Check [here](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/mashroom/cs677project.ipynb)
 
 
 
