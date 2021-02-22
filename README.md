@@ -253,29 +253,20 @@ But as iteration going on, h will be very large, making updating step becomes ve
 ***RMSProp code here***
 
 ```
-def RMSprop(x, y, step=0.01, iter_count=500, batch_size=4, alpha=0.9, beta=0.9):
+def RMSprop(x, y, lr=0.01, iter_count=500, batch_size=4, beta=0.9):
     length, features = x.shape
     data = np.column_stack((x, np.ones((length, 1))))
     w = np.zeros((features + 1, 1))
-    Sdw, v, eta = 0, 0, 10e-7
+    h, eta = 0, 10e-7
     start, end = 0, batch_size
-    
-    # 开始迭代
     for i in range(iter_count):
-        # 计算临时更新参数
-        w_temp = w - step * v
-        
-        # 计算梯度
-        dw = np.sum((np.dot(data[start:end], w_temp) - y[start:end]) * data[start:end], axis=0).reshape((features + 1, 1)) / length        
-        
-        # 计算累积梯度平方
-        Sdw = beta * Sdw + (1 - beta) * np.dot(dw.T, dw)
-        
-        # 计算速度更新量、
-        v = alpha * v + (1 - alpha) * dw
-        
-        # 更新参数
-        w = w - (step / np.sqrt(eta + Sdw)) * v
+        # calculate gradient
+        dw = np.sum((np.dot(data[start:end], w) - y[start:end]) * data[start:end], axis=0) / length        
+        # calculate sum of square of gradients
+        h = beta * h + (1 - beta) * np.dot(dw, dw)                     
+        # update w
+        w = w - (lr / np.sqrt(eta + h)) * dw.reshape((features + 1, 1))
+	
         start = (start + batch_size) % length
         if start > length:
             start -= length
@@ -284,6 +275,67 @@ def RMSprop(x, y, step=0.01, iter_count=500, batch_size=4, alpha=0.9, beta=0.9):
             end -= length
     return w
 ```
+
+***Adam***is another powerful optimizer.It not only saved the sum of square of history gradients(h2 )but also save sum of history gradients(h1 ):
+
+    calculate gradient: 
+      dwi = ∂L(w)/∂wi
+    update h1 and h2(add weight β1 and β2, dropped parts of hwi)
+      h1wi =β1 * h1wi + (1-β1)*(dwi)
+      h2wi =β2 * h2wi + (1-β2)*(dwi)²
+    update wi (√hwi can be 0 some times, so we add a small value c to √hwi)
+      wi = wi - η/(√hwi +c) * dwi 
 	
+    If h1 and h2 are initialized to the 0 vectors, they are biased to 0, so bias correction is done to offset these biases by calculating the bias corrected h1 and h2:
+
+      h1wi' = h1/(1-β1wi)
+      h2wi' = h2/(1-β2wi)
+    
+    then update wi:
+      wi = wi - η/(√h2wi' +c) * h1wi'
+***Adam code here***
+
+```
+def Adam(x, y, lr=0.01, iter_count=500, batch_size=4, beta1=0.9,beta2 = 0.999):
+    length, features = x.shape
+    data = np.column_stack((x, np.ones((length, 1))))
+    w = np.zeros((features + 1, 1))
+    h1, h2,eta = 0, 0,10e-7
+    start, end = 0, batch_size
+    for i in range(iter_count):
+        # calculate gradient
+        dw = np.sum((np.dot(data[start:end], w) - y[start:end]) * data[start:end], axis=0) / length        
+        # calculate sums
+        h1 = beta1 * h + (1 - beta1) * dw
+	h2 = beta2 * h + (1 - beta2) * np.dot(dw, dw)
+	# bias correction
+	h1 = h1/(1- beta1)
+	h2 = h2/(1- beta2)
+        # update w
+        w = w - (lr / np.sqrt(eta + h2)) * h1.reshape((features + 1, 1))
+	
+        start = (start + batch_size) % length
+        if start > length:
+            start -= length
+        end = (end + batch_size) % length
+        if end > length:
+            end -= length
+    return w
+```
+
+Now I tested these optimizers on MNIST and IMDB movie reviews,lets see the differenes of those optimizers:
+
+for MNIST:
+
+![mnist](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/mnist.png) 
+
+for IMDB:
+
+![imbd](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/imbd.png) 
+
+
+
+
+
  
 
