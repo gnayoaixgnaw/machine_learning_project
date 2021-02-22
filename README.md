@@ -290,7 +290,9 @@ This graph illustrate the advantages of adaptive lr vs constant lr:
 
 As iterations going on, we hope that learning rate becomes smaller.Because when function close to optimal solution, the changing step should be small to find best solution.So we need to gradually change learning rate.Also, we know that the weights for each coefficent is different, which means gradients of some coefficents are large while some are little.So in traditional SGD, changes of coefficents are not synchronous.So we need to distribute the coefficents which has large changes a small leanrning rate.
 
-To deal with this issue, we can use **Adagrad(adaptive gradient algorithm)**
+To deal with this issue, we can use **Adagrad(adaptive gradient algorithm)**, **RMSProp**, **Adam**
+
+### Adagrad
 
 Adagrad will give each coefficent a proper learning rate:
 
@@ -307,6 +309,8 @@ Adagrad will give each coefficent a proper learning rate:
 when updating coefficent, we can adjust the scale by mutiplying 1/√h.
 
 But as iteration going on, h will be very large, making updating step becomes very small. 
+
+### RMSProp
 
 **RMSProp** can optimize this problem.RMSProp uses an exponential weighted average to eliminate swings in gradient descent: a larger derivative of a dimension means a larger exponential weighted average, and a smaller derivative means a smaller exponential weighted average. This ensures that the derivatives of each dimension are of the same order of magnitude, thus reducing swings:
 
@@ -341,8 +345,9 @@ def RMSprop(x, y, lr=0.01, iter_count=500, batch_size=4, beta=0.9):
             end -= length
     return w
 ```
+### Adam
 
-***Adam***is another powerful optimizer.It not only saved the sum of square of history gradients(h2 )but also save sum of history gradients(h1 ):
+***Adam*** is another powerful optimizer.It not only saved the sum of square of history gradients(h2 )but also save sum of history gradients(h1 ):
 
     calculate gradient: 
       dwi = ∂L(w)/∂wi
