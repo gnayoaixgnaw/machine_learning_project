@@ -174,6 +174,11 @@ Here are more detailed pseudocode to compute gradient:
 
 
 
+#### Implement code via Pyspark 
+
+***Check [here](https://github.com/gnayoaixgnaw/Big_Data_Analytics/tree/main/assignment3)***
+
+
 ## Logistic regression
 
 Logistic regression is supervised model especially for prediction problem.Suppose we have a prediction problem.It is natural to assume that output y given the independent variable(s) X and model parameter θ is sampled from the exponential family.
