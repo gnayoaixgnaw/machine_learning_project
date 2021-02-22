@@ -79,27 +79,27 @@ So loss minimized at m = 14.96.
 >
 >
 >
->>first we need to remove parameters which have little contribution and generate sparse matrix, that is, the l1 norm( mean absolute error):
+>first we need to remove parameters which have little contribution and generate sparse matrix, that is, the l1 norm( mean absolute error):
 
->>   ***l1 = l + α∑ i|βi|***
+>   ***l1 = l + α∑ i|βi|***
    
     where l is lost function, ∑ i|βi| is l1 regularizers, α is regularization coefficient, βi is parameters.
->>we can visualize l1 lost function：
+>we can visualize l1 lost function：
 
->>![l1](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
+>![l1](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
 
->>The contour line in the figure is that of l, and the black square is the graph of L1 function. The place where the contour line of l intersects the graph of L1 for the first time is the optimal solution. It is easy to find that the black square must intersect the contour line at the vertex of the square first. l is much more likely to contact those angles than it is to contact any other part. Some dimensions of these points are 0 which will make some features equal to 0 and generate a sparse matrix, which can then be used for feature selection.
+>The contour line in the figure is that of l, and the black square is the graph of L1 function. The place where the contour line of l intersects the graph of L1 for the first time is the optimal solution. It is easy to find that the black square must intersect the contour line at the vertex of the square first. l is much more likely to contact those angles than it is to contact any other part. Some dimensions of these points are 0 which will make some features equal to 0 and generate a sparse matrix, which can then be used for feature selection.
 
->>Secondly, we can make parameters as little as possible by implement l2 norm:
+>Secondly, we can make parameters as little as possible by implement l2 norm:
 
    >>***l2 = l + α(∑ i|βi|²)^1/2*** 
     
     where l is lost function, (∑ i|βi|²)^1/2 is l2 regularizers, α is regularization coefficient, βi is parameters.
->>we can visualize l2 lost function：
+>we can visualize l2 lost function：
 
->>![l2](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
+>![l2](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
 
->>In comparison with the iterative formula without adding L2 regularization, parameters are multiplied by a factor less than 1 in each iteration, which makes parameters decrease continuously. Therefore, in general, parameters decreasing continuously.
+>In comparison with the iterative formula without adding L2 regularization, parameters are multiplied by a factor less than 1 in each iteration, which makes parameters decrease continuously. Therefore, in general, parameters decreasing continuously.
 
 ### Optimization
 
