@@ -198,6 +198,9 @@ Suppose Rj is jth partial derivative evaluated at Rj:
 
 ![derivative2](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/derivative2.png)
 
+	where Xi,j' is the jth dimension of Xi,Xi is ith entity in dataset.
+	
+
 **Gradient Descent pseudocode in Pyspark**
 
 ![pseudocode1](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/pseudocode2.png)
