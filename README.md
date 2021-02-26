@@ -75,7 +75,7 @@ then, computing lost function:
 Since cost function is a ”Convex” function, when its derivative is 0, the cost function hits bottom.
 So loss minimized at θ = 14.96.
 
-Now we have a polynomial linear regression:
+Now we have a polynomial linear regression, suppose each entity x has d dimensions:
 
 ![equation](https://latex.codecogs.com/gif.latex?y%20%3D%20%5CTheta_%7B0%7D%20&plus;%20%5CTheta_%7B1%7Dx_1%20&plus;%20...%20&plus;%20%5CTheta_%7Bd%7Dx_d)
 
@@ -92,7 +92,7 @@ Gradient Descent is an iterative algorithm,Start from an initial guess and try t
 
 Suppose ▽l(θ) is a vector whose ith entry is ith partial derivative evaluated at θi
 
-![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/derivative1.png)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5CDelta%20l%28%5Ctheta%29%20%3D%20%5Cbegin%7Bbmatrix%7D%5Cnonumber%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_0%7D%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%5C%5C%20.%5C%5C%20.%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%5C%5C%20%5Cend%7Bbmatrix%7D%20%5Cend%7Balign%7D)
 
 **Gradient Descent pseudocode**
 
