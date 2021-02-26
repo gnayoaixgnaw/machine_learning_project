@@ -115,18 +115,16 @@ Suppose ▽l(θ) is a vector whose ith entry is ith partial derivative evaluated
 In privious sessions, we got the loss function, which is   
   
 
-   ***l(θ0,θ1...) =1/n∑ i( f (Xi) - Yi)²***
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20l%28%5CTheta%20_0%2C%5CTheta%20_1...%5CTheta%20_d%29%20%26%20%3D%20%5Cfrac%7B1%7D%7B2n%7D%20%5Csum_%7Bi%7D%20%28f%28x_%7Bi%7D%29%20-%20y_%7Bi%7D%29%5E2%20%5Cnonumber%20%5Cend%7Balign%7D)
    
 then do expansion:  
   
 
-   ***l(θ0,θ1...) =1/n∑ i( Yi - (θ0 + θ1X1+ θ2X2...+θdXd))²***
-  
+![equation](https://latex.codecogs.com/gif.latex?l%28%5Ctheta%20_0%2C%5Ctheta%20_1%2C...%2C%5Ctheta%20_d%29%3D%20%5Cfrac%7B1%7D%7B2n%7D%5Csum_%7Bi%7D%5E%7B%7D%28y%5E%7B%28i%29%7D-%20%28%5Ctheta%20_0&plus;%20%5Ctheta%20_1x_1%5E%7B%28i%29%7D&plus;...%5Ctheta%20_dx_d%5E%7B%28i%29%7D%29%29)  
    
 Since it has mutiple dimensions,we compute partial derivatives:
 
-![derivative](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/derivative.png)  
-
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%20%3D%20-%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7B1%7D%5E%7Bn%7D%20x_%7B1%7D%5E%7B%28i%29%7D%28y%5E%7B%28i%29%7D%20-%20%28%5Ctheta%20_0&plus;%5Ctheta%20_1x_1%5E%7B%28i%29%7D%20&plus;%20...&plus;%20%5Ctheta%20_dx_d%5E%7B%28i%29%7D%20%29%5Cnonumber%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_2%7D%20%3D%20-%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7B1%7D%5E%7Bn%7D%20x_%7B2%7D%5E%7B%28i%29%7D%28y%5E%7B%28i%29%7D%20-%20%28%5Ctheta%20_0&plus;%5Ctheta%20_1x_1%5E%7B%28i%29%7D%20&plus;%20...&plus;%20%5Ctheta%20_dx_d%5E%7B%28i%29%7D%20%29%5Cnonumber%5C%5C%20...%5Cnonumber%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%20%3D%20-%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7B1%7D%5E%7Bn%7D%20x_%7Bd%7D%5E%7B%28i%29%7D%28y%5E%7B%28i%29%7D%20-%20%28%5Ctheta%20_0&plus;%5Ctheta%20_1x_1%5E%7B%28i%29%7D%20&plus;%20...&plus;%20%5Ctheta%20_dx_d%5E%7B%28i%29%7D%20%29%5Cnonumber%20%5Cend%7Balign%7D)
 
 Now we can compute components of the gradients and then sum them up and update weights in the next iteration.
  
