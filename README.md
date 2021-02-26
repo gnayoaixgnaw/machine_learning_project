@@ -317,15 +317,15 @@ To deal with this issue, we can use **Adagrad(adaptive gradient algorithm)**, **
 
 Adagrad will give each coefficent a proper learning rate:
 
-![adagrad](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/adagrad1.png) 
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20h_j%20%5Cleftarrow%20h_j%20&plus;%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20-%20%5Ceta%20%5Cfrac%7B1%7D%7B%5Csqrt%7Bh_j%7D%7D%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%20%5Cend%7Balign%7D) 
 
-    w : coefficents
+    θ : coefficents
     
-    ∂l/∂w : gradient
+    ∂l/∂θ : gradient
     
     η: learning rate 
     
-    h: sum of squares of all the previous gradients
+    hj: sum of squares of all the previous θj's gradients
 
 when updating coefficent, we can adjust the scale by mutiplying 1/√h.
 
@@ -335,12 +335,10 @@ But as iteration going on, h will be very large, making updating step becomes ve
 
 **RMSProp** can optimize this problem.RMSProp uses an exponential weighted average to eliminate swings in gradient descent: a larger derivative of a dimension means a larger exponential weighted average, and a smaller derivative means a smaller exponential weighted average. This ensures that the derivatives of each dimension are of the same order of magnitude, thus reducing swings:
 
-    calculate gradient: 
-      dwi = ∂L(w)/∂wi
-    update h (add weight β, dropped parts of hwi)
-      hwi =β * hwi + (1-β)*(dwi)²
-    update wi (√hwi can be 0 some times, so we add a small value c to √hwi)
-      wi = wi - η/(√hwi +c) * dwi 
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20h_j%20%5Cleftarrow%20%5Cbeta%20h_j%20&plus;%281-%5Cbeta%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20-%20%5Ceta%20%5Cfrac%7B1%7D%7B%5Csqrt%7Bh_j&plus;c%7D%7D%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%20%5Cend%7Balign%7D)
+
+    √hj can be 0 some times, so we add a small value c to √hj
+      
 ***RMSProp code here***
 
 ```
@@ -370,21 +368,15 @@ def RMSprop(x, y, lr=0.01, iter_count=500, batch_size=4, beta=0.9):
 
 ***Adam*** is another powerful optimizer.It not only saved the sum of square of history gradients(h2 )but also save sum of history gradients(h1 ):
 
-    calculate gradient: 
-      dwi = ∂L(w)/∂wi
-    update h1 and h2(add weight β1 and β2, dropped parts of hwi)
-      h1wi =β1 * h1wi + (1-β1)*(dwi)
-      h2wi =β2 * h2wi + (1-β2)*(dwi)²
-    update wi (√hwi can be 0 some times, so we add a small value c to √hwi)
-      wi = wi - η/(√hwi +c) * dwi 
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20h1_j%20%5Cleftarrow%20%5Cbeta1%20h_j%20&plus;%281-%5Cbeta1%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%20%5Cnonumber%5C%5C%20h2_j%20%5Cleftarrow%20%5Cbeta2%20h_j%20&plus;%281-%5Cbeta2%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%20%5Cnonumber%20%5Cend%7Balign%7D)
 	
     If h1 and h2 are initialized to the 0 vectors, they are biased to 0, so bias correction is done to offset these biases by calculating the bias corrected h1 and h2:
 
-      h1wi' = h1/(1-β1wi)
-      h2wi' = h2/(1-β2wi)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20h1_j%20%5Cleftarrow%20%5Cfrac%7Bh1_j%7D%7B1%20-%5Cbeta1%20%5E%7Bt%7D%7D%20%5Cnonumber%5C%5C%20h2_j%20%5Cleftarrow%20%5Cfrac%7Bh2_j%7D%7B1%20-%5Cbeta2%20%5E%7Bt%7D%7D%20%5Cnonumber%5C%5C%20%5Ctheta%20_i%20%5Cleftarrow%20%5Ctheta%20_i%20-%20%5Cfrac%7B%5Cmu%20%7D%7B%5Csqrt%7Bh2_j%7D&plus;c%7Dh1_j%20%5Cnonumber%20%5Cend%7Balign%7D)
     
-    then update wi:
-      wi = wi - η/(√h2wi' +c) * h1wi'
+    t means t th iteration.
+    
+    
 ***Adam code here***
 
 ```
