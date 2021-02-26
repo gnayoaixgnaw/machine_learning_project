@@ -49,20 +49,19 @@ Then consider this dataset as tuples of (1, 18), (2, 22), (3, 45), (4, 49), (5, 
 
     • Our goal is to minimize errors
 
-To minimize the amount of distance(errors), we need to find proper θ1 and θ0.We build a function :
-
-   ***l(θ1,θ0) =1/2n ∑ i( f (Xi) - Yi)²***
-   ![equation](https://latex.codecogs.com/gif.latex?l%28%5CTheta%20_0%2C%5CTheta%20_1%29%20%3D%20%5Cfrac%7B1%7D%7B2n%7D%5Csum_%7Bi%7D%20%28f%28x_%7Bi%7D%29-y_%7Bi%7D%29%5E%7B2%7D)
-
-
-which often referred to as a ***lost function***,.
+To minimize the amount of distance(errors), we need to find proper θ1 and θ0.We build a function ,which often referred to as a ***lost function***,.
 
 	lost function has three common formula:
 	    (1)MSE(Mean Squared Error)
 	    (2)RMSE(Root Mean Squared Error)
 	    (3)Logloss(Cross Entorpy loss) 
         
-In this case, we choose **Mean Squared Error**.So when we want to fit a line to given data, we need to minimize the lost function.
+
+In this case, we choose **Mean Squared Error**.
+
+![equation](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/CodeCogsEqn%20(1).gif)
+
+So when we want to fit a line to given data, we need to minimize the lost function.
 
 then, computing lost function:
 
