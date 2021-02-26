@@ -121,7 +121,7 @@ then do expansion:
   
 
 ![equation](https://latex.codecogs.com/gif.latex?l%28%5Ctheta%20_0%2C%5Ctheta%20_1%2C...%2C%5Ctheta%20_d%29%3D%20%5Cfrac%7B1%7D%7B2n%7D%5Csum_%7Bi%7D%5E%7B%7D%28y%5E%7B%28i%29%7D-%20%28%5Ctheta%20_0&plus;%20%5Ctheta%20_1x_1%5E%7B%28i%29%7D&plus;...%5Ctheta%20_dx_d%5E%7B%28i%29%7D%29%29)  
-   
+    
 Since it has mutiple dimensions,we compute partial derivatives:
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%20%3D%20-%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7B1%7D%5E%7Bn%7D%20x_%7B1%7D%5E%7B%28i%29%7D%28y%5E%7B%28i%29%7D%20-%20%28%5Ctheta%20_0&plus;%5Ctheta%20_1x_1%5E%7B%28i%29%7D%20&plus;%20...&plus;%20%5Ctheta%20_dx_d%5E%7B%28i%29%7D%20%29%5Cnonumber%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_2%7D%20%3D%20-%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7B1%7D%5E%7Bn%7D%20x_%7B2%7D%5E%7B%28i%29%7D%28y%5E%7B%28i%29%7D%20-%20%28%5Ctheta%20_0&plus;%5Ctheta%20_1x_1%5E%7B%28i%29%7D%20&plus;%20...&plus;%20%5Ctheta%20_dx_d%5E%7B%28i%29%7D%20%29%5Cnonumber%5C%5C%20...%5Cnonumber%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%20%3D%20-%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7B1%7D%5E%7Bn%7D%20x_%7Bd%7D%5E%7B%28i%29%7D%28y%5E%7B%28i%29%7D%20-%20%28%5Ctheta%20_0&plus;%5Ctheta%20_1x_1%5E%7B%28i%29%7D%20&plus;%20...&plus;%20%5Ctheta%20_dx_d%5E%7B%28i%29%7D%20%29%5Cnonumber%20%5Cend%7Balign%7D)
