@@ -174,6 +174,7 @@ We can make parameters as little as possible by implement l2 norm:
 
 ![equation](https://latex.codecogs.com/gif.latex?l_1%20%3D%20l&plus;%5Clambda%20%5Csum_%7Bi%3D1%7D%5E%7Bd%7D%5Cleft%20%7C%20%5Ctheta%20_i%20%5Cright%20%7C%5E%7B2%7D)
 
+
     	where l is lost function, ∑ i|θi|² is l2 regularizers, λ is regularization coefficient, θi is parameters.
 we can visualize l2 lost function：
 
