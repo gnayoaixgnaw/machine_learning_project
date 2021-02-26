@@ -150,20 +150,47 @@ Here are more detailed pseudocode to compute gradient:
 ***Check [here](https://github.com/gnayoaixgnaw/Big_Data_Analytics/tree/main/assignment3)***
 
 
+
+## Regulation in lost function
+
+We will always face **over-fitting issue** in real problem. **over-fitting issue** is that the parameters of model are large and model's rebustness is poor, which means a little change of test data may cause a huge difference in result.So in order to aviod over-fitting,
+
+### l1 norm
+
+We need to remove parameters which have little contribution and generate sparse matrix, that is, the l1 norm( mean absolute error):
+
+![equation](https://latex.codecogs.com/gif.latex?l_1%20%3D%20l&plus;%5Clambda%20%5Csum_%7Bi%3D1%7D%5E%7Bd%7D%5Cleft%20%7C%20%5Ctheta%20_i%20%5Cright%20%7C)
+   
+    	where l is lost function, ∑ i|θi| is l1 regularizers, λ is regularization coefficient, θi is parameters.
+we can visualize l1 lost function：
+
+![l1](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
+
+The contour line in the figure is that of l, and the black square is the graph of L1 function. The place where the contour line of l intersects the graph of L1 for the first time is the optimal solution. It is easy to find that the black square must intersect the contour line at the vertex of the square first. l is much more likely to contact those angles than it is to contact any other part. Some dimensions of these points are 0 which will make some features equal to 0 and generate a sparse matrix, which can then be used for feature selection.
+
+### l2 norm
+
+We can make parameters as little as possible by implement l2 norm:
+
+![equation](https://latex.codecogs.com/gif.latex?l_1%20%3D%20l&plus;%5Clambda%20%5Csum_%7Bi%3D1%7D%5E%7Bd%7D%5Cleft%20%7C%20%5Ctheta%20_i%20%5Cright%20%7C%5E%7B2%7D)
+
+    	where l is lost function, ∑ i|θi|² is l2 regularizers, λ is regularization coefficient, θi is parameters.
+we can visualize l2 lost function：
+
+![l2](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
+
+In comparison with the iterative formula without adding L2 regularization, parameters are multiplied by a factor less than 1 in each iteration, which makes parameters decrease continuously. Therefore, in general, parameters decreasing continuously.
+
+	
+	
+	
 ## Logistic regression
 
-Logistic regression is supervised model especially for prediction problem.Suppose we have a prediction problem.It is natural to assume that output y given the independent variable(s) X and model parameter θ is sampled from the exponential family.
+Logistic regression is supervised model especially for prediction problem.Suppose we have a prediction problem.It is natural to assume that output y (0/1) given the independent variable(s) X ,which has d dimensions and model parameter θ is sampled from the exponential family.
 
-The parameter θ is linearly related to X that is, assuming X is vector-valued
+It makes sense to assume that the output Y is sampled from a Bernoulli and here is the log-likelihood:
 
-***θ = ∑j XjRj***
-
-     where r is regression coefficent.
-
-Then I implement Log-likelihood, written as:
-
-***LLH(R1, R2, ..., Rd|x1, x2, ..., xn, y1, y2, ..., yn) = ∑i (logb(Yi) + θiT(Y) - f(θi))***
-
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20L%28p%7Cx_1%2Cx_2...%2Cx_n%29%20%26%3D%20%5Cprod_%7Bi%20%3D%201%7D%5E%7Bn%7Dp%5E%7Bx_i%7D%281-p%29%5E%7B%281-x_i%29%7D%5Cnonumber%20%5C%5C%20%26%3D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5Bx_i%5Clog%20%28p%29&plus;%281-x_i%29%5Clog%20%281-p%29%5D%20%5Cnonumber%20%5Cend%7Balign%7D)
 
 Given a bunch of data for example,suppose output Y has (0/1):
 
@@ -176,30 +203,42 @@ Given a bunch of data for example,suppose output Y has (0/1):
 	• If coefs are (-1, 1), LLH is 7.4
 	• If coefs are (1, 1), LLH is 394
 	
-Now simplify this formula:
 
-***LLH = ∑i (Yiθi - log(1+e^θi))***
+However this is not enough to get the loss function, logistic regreesion needs a sigmoid function to show the probability of y = 0/1,which is :
 
-     where θi = ∑j Rj*Xi,j ,i means ith entity,j means entity's ith dimension.
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20P%28x_i%29%20%26%3D%20%5Cfrac%7B1%7D%7B1-e%5E%7B-y_i%7D%7D%5Cnonumber%20%5C%5C%20%26%3D%5Cfrac%7Be%5E%7B%5Ctheta%20_0&plus;%5Ctheta_1%20x_1&plus;...&plus;%5Ctheta_d%20x_d%7D%7D%7B1&plus;e%5E%7B%5Ctheta%20_0&plus;%5Ctheta_1%20x_1&plus;...&plus;%5Ctheta_d%20x_d%7D%7D%20%5Cnonumber%20%5Cend%7Balign%7D)
+
+The parameter ω is related to X that is, assuming X is vector-valued and ω can be represent as :
+
+![equation](https://latex.codecogs.com/gif.latex?%5Comega%20_i%20%3D%20%5Csum_%7Bj%20%3D%201%7D%5E%7Bd%7Dx_j%5E%7B%28i%29%7D%20%5Ctheta%20_j)
+
+     where θ is regression coefficent and j is entity's jth dimension .
+
+Now its time to implement Log-likelihood in logistic regression, written as:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20L%28p%7Cx_1%2Cx_2...%2Cx_n%2C%20y_1%2Cy_2...%2Cy_n%29%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Clog%20%5Cfrac%7Be%5E%7B%5Comega%20_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D&plus;%281-y_i%29%5Clog%20%281-%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%28%5Clog%20e%5E%7B%5Comega_i%7D%29-%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Comega_i-%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5Cend%7Balign%7D)
 
 	
-So now I can calculate loss function.As gradient descent need to minimize loss function,the loss function should be negative LLH:
+Now calculate loss function.As gradient descent need to minimize loss function,the loss function should be negative LLH:
 
-***loss function = ∑i (-Yiθi + log(1+e^θi))***
-
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20loss%20function%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Comega_i-%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B-%20y_i%5Comega_i%20&plus;%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5Cend%7Balign%7D)
 
 Appling regularization (l2 norm):
 
-***loss function = ∑i (-Yiθi + log(1+e^θi)) + λ∑j Rj^2***
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20loss%20function%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B-%20y_i%5Comega_i%20&plus;%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B-%20y_i%5Comega_i%20&plus;%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%20&plus;%20%5Clambda%20%5Csum_%7Bi%3D1%7D%5E%7Bj%7D%5Ctheta%20_i%20%5E%7B2%7D%5Cnonumber%20%5Cend%7Balign%7D)
+
+	where j is entity's jth dimension.
 
 
 #### How to calculate gradient
 
-Suppose Rj is jth partial derivative evaluated at Rj:
+Suppose θj is jth partial derivative :
 
-![derivative2](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/derivative2.png)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5CDelta%20l%28%5Ctheta%29%20%3D%20%5Cbegin%7Bbmatrix%7D%5Cnonumber%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_0%7D%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%5C%5C%20.%5C%5C%20.%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%5C%5C%20%5Cend%7Bbma)
 
-	where Xi,j' is the jth dimension of Xi,Xi is ith entity in dataset.
+Since it has mutiple dimensions,we compute partial derivatives:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_1%5E%7B%28i%29%7D&plus;x_1%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_1%20%5Cnonumber%20%5C%5C%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_2%7D%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_2%5E%7B%28i%29%7D&plus;x_2%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_2%20%5Cnonumber%20%5C%5C%20...%20%5Cnonumber%20%5C%5C%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_d%5E%7B%28i%29%7D&plus;x_d%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_d%20%5Cnonumber%20%5Cend%7Balign%7D)
 	
 
 **Gradient Descent pseudocode in Pyspark**
@@ -216,43 +255,6 @@ Suppose Rj is jth partial derivative evaluated at Rj:
 (working on it......)
 
 
-## Regulation in lost function
-
-We will always face **over-fitting issue** in real problem. **over-fitting issue** is that the parameters of model are large and model's rebustness is poor, which means a little change of test data may cause a huge difference in result.So in order to aviod over-fitting,
-
-### l1 norm
-
-We need to remove parameters which have little contribution and generate sparse matrix, that is, the l1 norm( mean absolute error):
-
-***l1 = l + α∑ i|θi|***
-   
-    	where l is lost function, ∑ i|θi| is l1 regularizers, α is regularization coefficient, θi is parameters.
-we can visualize l1 lost function：
-
-![l1](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
-
-The contour line in the figure is that of l, and the black square is the graph of L1 function. The place where the contour line of l intersects the graph of L1 for the first time is the optimal solution. It is easy to find that the black square must intersect the contour line at the vertex of the square first. l is much more likely to contact those angles than it is to contact any other part. Some dimensions of these points are 0 which will make some features equal to 0 and generate a sparse matrix, which can then be used for feature selection.
-
-### l2 norm
-
-We can make parameters as little as possible by implement l2 norm:
-
-   ***l2 = l + α(∑ i|θi|^2)^1/2*** 
-    
-    	where l is lost function, (∑ i|θi|²)^1/2 is l2 regularizers, α is regularization coefficient, θi is parameters.
-we can visualize l2 lost function：
-
-![l2](https://i.loli.net/2018/11/28/5bfe89e366bba.jpg)
-
-In comparison with the iterative formula without adding L2 regularization, parameters are multiplied by a factor less than 1 in each iteration, which makes parameters decrease continuously. Therefore, in general, parameters decreasing continuously.
-
-### ln norm 
-
-ln norm is a general formula in norm:
-
-   ***ln = l + α(∑ i|θi|^n)^1/n*** 
-   
-   	when n = 1 it is l1 norm, n =2 it is l2 norm
 	
 
 
