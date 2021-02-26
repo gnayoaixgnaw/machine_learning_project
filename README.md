@@ -59,7 +59,7 @@ To minimize the amount of distance(errors), we need to find proper θ1 and θ0.W
 
 In this case, we choose **Mean Squared Error**.
 
-![equation](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/CodeCogsEqn%20(1).gif)
+![equation](https://latex.codecogs.com/gif.latex?l%28%5CTheta%20_0%2C%5CTheta%20_1%29%20%3D%20%5Cfrac%7B1%7D%7B2n%7D%5Csum_%7Bi%7D%20%28f%28x_%7Bi%7D%29-y_%7Bi%7D%29%5E%7B2%7D)
 
 So when we want to fit a line to given data, we need to minimize the lost function.
 
