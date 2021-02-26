@@ -65,11 +65,9 @@ So when we want to fit a line to given data, we need to minimize the lost functi
 
 then, computing lost function:
 
-        E(θ1,θ0) =1/n∑ i( f (Xi) - Yi)²
-                 =1/n∑ i( θ1*Xi + θ0 - Yi)²
-        l'(θ1,θ0)=1/n∑ i 2*( θ1*Xi² - Xi*Yi)
-                 =2/n*(2m(1 + 4 + 9 + 16 + 25) - 2(18 + 44 + 135 + 196 + 430))
-                 = 2/5*(110m - 1646)
+        ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20l%28%5CTheta%20_0%2C%5CTheta%20_1%29%20%26%20%3D%20%5Cfrac%7B1%7D%7B2n%7D%20%5Csum_%7Bi%7D%20%28f%28x_%7Bi%7D%29-y_%7Bi%7D%29%5E%7B2%7D%20%5Cnonumber%20%5C%5C%20%26%3D%20%5Cfrac%7B1%7D%7B2n%7D%20%5Csum_%7Bi%7D%28%5CTheta%20_1%20x_i%20&plus;%20%5CTheta%20_1%20-%20y_%7Bi%7D%29%5E%7B2%7D%5Cnonumber%20%5Cend%7Balign%7D)
+        ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20l%7B%7D%27%28%5CTheta%20_0%2C%5CTheta%20_1%29%20%26%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi%7D%20%28%5CTheta%20_1%20x_%7Bi%7D%20%5E%7B2%7D%20-x_%7Bi%7Dy_%7Bi%7D%29%20%5Cnonumber%20%5C%5C%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi%7D%282%5CTheta%20_1%281%20&plus;%204%20&plus;%209%20&plus;%2016%20&plus;%2025%29%20-%202%2818%20&plus;%2044%20&plus;%20135%20&plus;%20196%20&plus;%20430%29%29%5Cnonumber%20%5C%5C%20%26%3D%20%5Cfrac%7B1%7D%7B5%7D%28110m%20-%201646%29%5Cnonumber%20%5Cend%7Balign%7D)
+
 Since cost function is a ”Convex” function, when its derivative is 0, the cost function hits bottom.
 So loss minimized at m = 14.96.
 
