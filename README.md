@@ -235,7 +235,7 @@ Appling regularization (l2 norm):
 
 Suppose θj is jth partial derivative :
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5CDelta%20l%28%5Ctheta%29%20%3D%20%5Cbegin%7Bbmatrix%7D%5Cnonumber%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_0%7D%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%5C%5C%20.%5C%5C%20.%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%5C%5C%20%5Cend%7Bbma)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5CDelta%20l%28%5Ctheta%29%20%3D%20%5Cbegin%7Bbmatrix%7D%5Cnonumber%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_0%7D%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%5C%5C%20.%5C%5C%20.%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%5C%5C%20%5Cend%7Bbmatrix%7D%20%5Cend%7Balign%7D)
 
 Since it has mutiple dimensions,we compute partial derivatives:
 
