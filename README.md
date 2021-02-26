@@ -34,7 +34,7 @@ Linear regression is very simple and basic.First, linear regression is supervise
 
 Let's look at a simple linear regression equation: 
 
-   ***Y = θ1X + θ0 ***
+   ![equation](https://latex.codecogs.com/gif.latex?y%20%3D%20%5CTheta%20_1x&plus;%5CTheta%20_0)
 
     ▷ θ1 is the coefficient of the independent variable (slope)
 
