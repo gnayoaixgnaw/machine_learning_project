@@ -189,7 +189,7 @@ In comparison with the iterative formula without adding L2 regularization, param
 
 Logistic regression is supervised model especially for prediction problem.Suppose we have a prediction problem.It is natural to assume that output y (0/1) given the independent variable(s) X ,which has d dimensions and model parameter θ is sampled from the exponential family.
 
-It makes sense to assume that the output Y is sampled from a Bernoulli and here is the log-likelihood:
+It makes sense to assume that the x is sampled from a Bernoulli and here is the log-likelihood:
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20L%28p%7Cx_1%2Cx_2...%2Cx_n%29%20%26%3D%20%5Cprod_%7Bi%20%3D%201%7D%5E%7Bn%7Dp%5E%7Bx_i%7D%281-p%29%5E%7B%281-x_i%29%7D%5Cnonumber%20%5C%5C%20%26%3D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5Bx_i%5Clog%20%28p%29&plus;%281-x_i%29%5Clog%20%281-p%29%5D%20%5Cnonumber%20%5Cend%7Balign%7D)
 
