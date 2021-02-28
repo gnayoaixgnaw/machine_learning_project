@@ -318,7 +318,7 @@ below fomula(1) = ![equation](https://latex.codecogs.com/gif.latex?-%20y_i%20%5E
 
 then the final derivatives for ***batch of data*** can be written as:
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%200&plus;%202%5Clambda%20%5Cvec%7Bw%7D%20%26%20%2Cif%20%281-%20y_i%20%5E%7Btrue%7D*%5Cvec%7Bw%7D%5Ccdot%20x_i%29%20%3C0%5C%5C%20%5Csum_%7Bi%20%3D%200%7D%5E%7Bn%7D-%20y_i%20%5E%7Btrue%7Dx_i&plus;2%5Clambda%20%5Cvec%7Bw%7D%26%20%2Cif%20%281-%20y_i%20%5E%7Btrue%7D*%5Cvec%7Bw%7D%5Ccdot%20x_i%29%20%3E%3D0%20%5Cend%7Bmatrix%7D%5Cright.)
+![equation](https://latex.codecogs.com/gif.latex?%5Cfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bi%20%3D%200%7D%5E%7Bn%7D%20%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%200%26%20%2Cif%20%281-%20y_i%20%5E%7Btrue%7D*%5Cvec%7Bw%7D%5Ccdot%20x_i%29%20%3C0%5C%5C%20-%20y_i%20%5E%7Btrue%7Dx_i%26%20%2Cif%20%281-%20y_i%20%5E%7Btrue%7D*%5Cvec%7Bw%7D%5Ccdot%20x_i%29%20%3E%3D0%20%5Cend%7Bmatrix%7D%5Cright.&plus;%202%5Clambda%20%5Cvec%7Bw%7D)
 
 
 #### Implement code via Pyspark 
