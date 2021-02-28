@@ -265,7 +265,7 @@ So basiclly, all points x in any line or plane or hyperplane can be discribed as
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cvec%7Bw%7D%5Ccdot%20x_0%20&plus;%20b%20%3D%200)
 
-Now here is a point x and we need to caluculate the distance (which can be discribed as y) between this point to plane:
+Now here is a point x and we need to caluculate the distance (which can be discribed as y) between this point and plane:
 
 ![equation](https://latex.codecogs.com/gif.latex?y%20%3D%20%5Cvec%7Bw%7D%5Ccdot%28x-x_0%29%20%3D%20%5Cvec%7Bw%7D%5Ccdot%20x%20-%20%5Cvec%7Bw%7D%5Ccdot%20x_0%20%3D%20%5Cvec%7Bw%7D%5Ccdot%20x&plus;b)
 
@@ -290,11 +290,11 @@ First, define a normal loss function:
 
 when this loss function is hinge loss, it is exactly svm's loss function:
 
-![equation](https://latex.codecogs.com/gif.latex?l%20%3D%20max%280%2C%201%20-%20y_i%5E%7Bpred%7Dy_i%5E%7Btrue%7D%20%29%20%3D%20max%280%2C%201%20-%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5Ccdot%20x_i*y_i%29)
+![equation](https://latex.codecogs.com/gif.latex?l%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7Dmax%280%2C%20y_i%5E%7Bpred%7D*y_i%5E%7Btrue%7D%29%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7Dmax%280%2C%201%20-%5Cvec%7Bw%7D%5Ccdot%20x_i*y_i%29)
 
 then add l2 norm, the final loss function is :
 
-![equation](https://latex.codecogs.com/gif.latex?l%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7Dmax%280%2C%201%20-%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5Ccdot%20x_i*y_i%29%20&plus;%20%5Clambda%20%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5E%7B2%7D)
+![equation](https://latex.codecogs.com/gif.latex?l%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7Dmax%280%2C%201%20-%5Cvec%7Bw%7D%5Ccdot%20x_i*y_i%29%20&plus;%20%5Clambda%20%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5E%7B2%7D)
 
 #### How to calculate gradient
 
