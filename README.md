@@ -582,6 +582,8 @@ AdaBound limits learning rate in a certain scale:
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5E%7Bi%7D%5Cleftarrow%20%5Cbeta_1%20m_j%20%5E%7Bi-1%7D&plus;%281-%5Cbeta%20_1%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5Cnonumber%5C%5C%20h_j%5E%7Bi%7D%20%5Cleftarrow%20%5Cbeta_2%20h_%7Bj%7D%5E%7Bi-1%7D&plus;%281-%5Cbeta%20_2%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%5Cnonumber%5C%5C%20AMSBound%20%3A%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20-%20clip%28%5Ceta%20%5Cfrac%7B1%7D%7B%5Csqrt%7Bh_j&plus;c%7D%7D%29m_j%20%5Cnonumber%5C%5C%20where%20%3A%20clip%28x%29%3D%20np.clip%28x%2C0.1-%5Cfrac%7B0.1%7D%7B%281-%5Cbeta%20_2%29t&plus;1%7D%2C0.1&plus;%5Cfrac%7B0.1%7D%7B%281-%5Cbeta%20_2%29t%7D%29%5Cnonumber%20%5Cend%7Balign%7D)
 
+
+
 #### AdamW
 
 Add weight decay to Adam:
@@ -601,15 +603,22 @@ Add weight decay to SGDM:
 
 #### SGDMN
 
-SGDMN is aimed to solve local optimal problem.When local optimal problem happend, SGDMN will do an additional calculation to determine whether to stop iteration:
+SGDMN(SGDM with Nesterov) is aimed to solve local optimal problem.When local optimal problem happend, SGDMN will do an additional calculation to determine whether to stop iteration:
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20&plus;%20m_j%20%5Cnonumber%5C%5C%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20&plus;%20%5Ceta%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20&plus;%20m_j%20%5Cnonumber%20%5Cend%7Balign%7D)
 
+
+#### NAdam
+
+Nadam(Adam with Nesterov) is aimed to solve local optimal problem.When local optimal problem happend, NAdam will do an additional calculation to determine whether to stop iteration:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Cbeta_1%20m_j%5Cnonumber%5C%5C%20h_j%20%5Cleftarrow%20%5Cbeta_2%20h_j%20%5Cnonumber%5C%5C%20m_j%20%5Cleftarrow%20%5Cfrac%7Bm_j%7D%7B1-%5Cbeta%20_1%5E%7Bt%7D%7D%5Cnonumber%5C%5C%20h_j%20%5Cleftarrow%20%5Cfrac%7Bh_j%7D%7B1-%5Cbeta%20_2%5E%7Bt%7D%7D%5Cnonumber%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20-%20%5Ceta%20%5Cfrac%7B1%7D%7B%5Csqrt%7Bh_j&plus;c%7D%7Dm_j%20%5Cnonumber%5C%5C%20m_j%20%5Cleftarrow%20%5Cbeta_1%20m_j%20&plus;%281-%5Cbeta%20_1%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5Cnonumber%5C%5C%20h_j%20%5Cleftarrow%20%5Cbeta_2%20h_j%20&plus;%281-%5Cbeta%20_2%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%5Cnonumber%5C%5C%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20&plus;%20%5Ceta%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20-%20%5Ceta%20%5Cfrac%7B1%7D%7B%5Csqrt%7Bh_j&plus;c%7D%7Dm_j%20%5Cnonumber%20%5Cend%7Balign%7D)
 
 
 comparation between these optimizers ,lets see the differenes of those optimizers:
 
 ![image](https://miro.medium.com/max/892/1*63HMdMyw_XDcNkRCQ1nrpw.png) 
+
 
 
 ### Now I will share a kaggle project based on ML:
