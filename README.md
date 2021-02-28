@@ -307,6 +307,7 @@ then calculate derivatives for two parts:
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%28%5Cvec%7Bw%7D%5Ccdot%20x%29%7D%20%3D%20%5Cfrac%7B%5Cpartial%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7Dmax%280%2C%201-%20%5Cvec%7Bw%7D%5Ccdot%20x_i*y_i%20%5E%7Btrue%7D%29%7D%7B%5Cpartial%20%28%5Cvec%7Bw%7D%5Ccdot%20x_i%29%7D%20%5C%5C%20%5Cfrac%7B%5Cpartial%20%28%5Cvec%7Bw%7D%5Ccdot%20x%29%7D%7B%5Cpartial%20%5Cvec%7Bw%7D%7D%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7Dx_i%20%5Cend%7Balign%7D)
 
 In conclusion, the final gradient is :
+
 (1)if ![equation](https://latex.codecogs.com/gif.latex?%281-%20%5Cvec%7Bw%7D%5Ccdot%20x_i*y_i%20%5E%7Btrue%7D%29%20%3C%200):
 
 below fomula(1) = 0, which means the derivative = 0
@@ -326,13 +327,13 @@ then add l2 norm, the final derivatives can be written as:
 
 ### multiple class svm 
 
-Different from binary-class svm, multi-class svm's loss function requires the score on the correct class always be Δ(a boundary value) higher than scores on incorrect classes.
+Different from binary-class svm, multi-class svm's loss function requires the score on the correct class always be ***Δ(a boundary value)*** higher than scores on incorrect classes.
 
-Suppose there is a dataset, the ith entity xi contains its features(has d features represent as vector) and class yi, then given svm model f(xi,w) to calculate the scores(as vector) in all classes,here we use si to represent this vector.
+Suppose there is a dataset, the ***ith entity xi*** contains its features(has ***d*** features represent as vector) and class ***yi***, then given svm model f(xi,w) to calculate the scores(as vector) in all classes,here we use **si** to represent this vector.
 
 #### loss function
 
-According to the definition of multi-class svm, we can get loss fucntion:
+According to the definition of multi-class svm, we can get ith entity xi's loss fucntion:
 
 ![equation](https://latex.codecogs.com/gif.latex?l_i%20%3D%20%5Csum_%7Bi%5Cneq%20y_i%7D%5E%7Bd%7Dmax%280%2Cs_j%20-%20s_y_i&plus;%5CDelta%20%29)
 
@@ -342,7 +343,7 @@ Suppose there are 3 classes, for the ith sample xi, we get scores = [12,-7,10],w
 
 ![equation](https://latex.codecogs.com/gif.latex?l_i%20%3D%20max%280%2C%20-7-12&plus;9%29&plus;max%280%2C%2010-12&plus;9%29)
 
-As w is a vector in loss function, we expend loss function:
+As ***w*** is a vector in loss function, we expend loss function:
 
 ![equation](https://latex.codecogs.com/gif.latex?l_i%20%3D%20%5Csum_%7Bi%5Cneq%20y_i%7D%5E%7Bd%7Dmax%280%2C%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%20%29)
 
@@ -352,15 +353,15 @@ Then add l2 norm:
 
 #### How to calculate gradient
 
-As yi and j are different, we calculate wyi's derivative for ith sample xi first:
+As ***yi*** and ***j*** are different, we calculate ***wyi***'s derivative for ith entity xi first:
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l_i%7D%7B%5Cpartial%20%5Cvec%7Bw_y_i%7D%7D%20%26%3D%20%5Cfrac%7B%5Cpartial%20%5Csum_%7Bi%5Cneq%20y_i%7D%5E%7Bd%7Dmax%280%2C%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20&plus;%20%5Clambda%20%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5E2%7D%7B%5Cpartial%20%5Cvec%7Bw_y_i%7D%7D%20%5Cnonumber%5C%5C%20%26%3D%20%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%20-x_i&plus;%202%5Clambda%20%5Cvec%7Bw_y_i%7D%26%2C%20if%20%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20%3E%3D0%5C%5C%200&plus;2%5Clambda%20%5Cvec%7Bw_y_i%7D%26%20%2Cif%20%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20%3C0%20%5Cend%7Bmatrix%7D%5Cright.%20%5Cnonumber%20%5Cend%7Balign%7D)
 
-then calculate wj's derivative for ith sample xi:
+then calculate ***wj***'s derivative for ith entity xi:
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l_i%7D%7B%5Cpartial%20%5Cvec%7Bw_j%7D%7D%20%26%3D%20%5Cfrac%7B%5Cpartial%20%5Csum_%7Bi%5Cneq%20y_i%7D%5E%7Bd%7Dmax%280%2C%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20&plus;%20%5Clambda%20%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5E2%7D%7B%5Cpartial%20%5Cvec%7Bw_j%7D%7D%20%5Cnonumber%5C%5C%20%26%3D%20%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%20x_i&plus;%202%5Clambda%20%5Cvec%7Bw_j%7D%26%2C%20if%20%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20%3E%3D0%5C%5C%200&plus;2%5Clambda%20%5Cvec%7Bw_j%7D%26%20%2Cif%20%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20%3C0%20%5Cend%7Bmatrix%7D%5Cright.%20%5Cnonumber%20%5Cend%7Balign%7D)
 
-The gradient of vector w contians wj(from 1 to d) and each wj's value depends on the value of ![equation](https://latex.codecogs.com/gif.latex?%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29):
+The gradient of vector ***w*** contians ***wj***(from 1 to d) and each ***wj***'s value depends on the value of ![equation](https://latex.codecogs.com/gif.latex?%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29):
 
 ![equation](https://latex.codecogs.com/gif.latex?%5CDelta%20w_i%20%3D%20%5Bw_1%5E%7Bi%7D%3D%20%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%20x_i%5C%5C%20-x_i%5C%5C%200%20%5Cend%7Bmatrix%7D%5Cright....w_1%5E%7Bi%20%7D%20%3D%20%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%20x_i%5C%5C%20-x_i%5C%5C%200%20%5Cend%7Bmatrix%7D%5Cright.%5D)
 
