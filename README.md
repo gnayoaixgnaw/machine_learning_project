@@ -516,6 +516,8 @@ def RMSprop(x, y, lr=0.01, iter_count=500, batch_size=4, beta=0.9):
     
     t means t th iteration.
     
+![equation](https://latex.codecogs.com/gif.latex?%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20-%20%5Ceta%20%5Cfrac%7B1%7D%7B%5Csqrt%7Bh_j&plus;c%7D%7Dm_j)
+    
     
 ***Adam code here***
 
