@@ -560,6 +560,10 @@ This graph illustrates that SGDM is always used in computer vision whereas Adam 
 
 ### optimize Adam and SGDM
 
+For Adam, there are ***SWATS***,***AMSGrad***,***AdaBound***,and ***AdamW***.
+
+For SGDM, there are ***SGDMW***
+
 #### SWATS
 
 combine Adam and SGDM:
@@ -568,6 +572,27 @@ combine Adam and SGDM:
 
 #### AMSGrad
 
+optimize Adam in changing the way to update ***hj***:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5E%7Bi%7D%5Cleftarrow%20%5Cbeta_1%20m_j%20%5E%7Bi-1%7D&plus;%281-%5Cbeta%20_1%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5Cnonumber%5C%5C%20h_j%5E%7Bi%7D%20%5Cleftarrow%20%5Cbeta_2%20h_%7Bj%7D%5E%7Bi-1%7D&plus;%281-%5Cbeta%20_2%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%5Cnonumber%5C%5C%20AMSGrad%20%3A%20h_j%5E%7Bi%7D%3D%20max%28h_j%5E%7Bi%7D%2Ch_%7Bj%7D%5E%7Bi-1%7D%29%5Cnonumber%20%5Cend%7Balign%7D)
+
+AMSGrad makes learning rate monotone decrease and waives small gradients.
+
+#### AdaBound
+
+AdaBound limits learning rate in a certain scale:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5E%7Bi%7D%5Cleftarrow%20%5Cbeta_1%20m_j%20%5E%7Bi-1%7D&plus;%281-%5Cbeta%20_1%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5Cnonumber%5C%5C%20h_j%5E%7Bi%7D%20%5Cleftarrow%20%5Cbeta_2%20h_%7Bj%7D%5E%7Bi-1%7D&plus;%281-%5Cbeta%20_2%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%5Cnonumber%5C%5C%20AMSBound%20%3A%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20-%20clip%28%5Ceta%20%5Cfrac%7B1%7D%7B%5Csqrt%7Bh_j&plus;c%7D%7D%29m_j%20%5Cnonumber%5C%5C%20where%20%3A%20clip%28x%29%3D%20np.clip%28x%2C0.1-%5Cfrac%7B0.1%7D%7B%281-%5Cbeta%20_2%29t&plus;1%7D%2C0.1&plus;%5Cfrac%7B0.1%7D%7B%281-%5Cbeta%20_2%29t%7D%29%5Cnonumber%20%5Cend%7Balign%7D)
+
+#### AdamW
+
+Add weight decay to Adam:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5E%7Bi%7D%5Cleftarrow%20%5Cbeta_1%20m_j%20%5E%7Bi-1%7D&plus;%281-%5Cbeta%20_1%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5Cnonumber%5C%5C%20h_j%5E%7Bi%7D%20%5Cleftarrow%20%5Cbeta_2%20h_%7Bj%7D%5E%7Bi-1%7D&plus;%281-%5Cbeta%20_2%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%5Cnonumber%5C%5C%20AdamW%20%3A%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20-%20%5Ceta%20%28%5Cfrac%7B1%7D%7B%5Csqrt%7Bh_j&plus;c%7D%7Dm_j&plus;%5Cgamma%20%5Ctheta%20_j%20%29%5Cnonumber%20%5Cend%7Balign%7D)
+
+#### SGDW
+
+Add weight decay to SGDM:
 
 
 
