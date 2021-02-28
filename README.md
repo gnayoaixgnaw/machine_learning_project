@@ -253,10 +253,126 @@ Since it has mutiple dimensions,we compute partial derivatives:
 
 
 ## Support victor machine
-(working on it......)
+
+Traditional svm is binary-class svm, and there is also multi-class svm. 
 
 
-	
+### binary class svm 
+
+Suppose there is a dataset that is linearly separable, it is possible to put a strip between two classes.The points that keep strip from expending are 'support vector'.
+
+So basiclly, all points x in any line or plane or hyperplane can be discribed as a vevtor with distance b:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cvec%7Bw%7D%5Ccdot%20x_0%20&plus;%20b%20%3D%200)
+
+Now here is a point x and we need to caluculate the distance (which can be discribed as y) between this point to plane:
+
+![equation](https://latex.codecogs.com/gif.latex?y%20%3D%20%5Cvec%7Bw%7D%5Ccdot%28x-x_0%29%20%3D%20%5Cvec%7Bw%7D%5Ccdot%20x%20-%20%5Cvec%7Bw%7D%5Ccdot%20x_0%20%3D%20%5Cvec%7Bw%7D%5Ccdot%20x&plus;b)
+
+Notice y should be -1 or 1 to determine which of the sides the point x is.
+
+This is because in basic svm, it choose two planes:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cvec%7Bw%7D%5Ccdot%20x&plus;b%20%3D%201%20%5Cnonumber%20%5C%5C%20%5Cvec%7Bw%7D%5Ccdot%20x&plus;b%20%3D%20-1%5Cnonumber%20%5Cend%7Balign%7D)
+
+	where y > 1 then x is '+'(or x is positive sample) 
+	where y < -1 then x is '-'(or x is negative sample)
+
+![image](https://pic4.zhimg.com/v2-197913c461c1953c30b804b4a7eddfcc_1440w.jpg?source=172ae18b)
+
+The distance between two planes are ![equation](https://latex.codecogs.com/gif.latex?%5Cfrac%7B2%7D%7B%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%7D),so we need to maximize this distance to get optimal solution.
+
+#### loss function
+
+First, define a normal loss function:
+
+![equation](https://latex.codecogs.com/gif.latex?l%20%3D%20%5Csum_%7Bi%20%3D%201%7D%5E%7Bn%7Dl%28y_i%20%5E%7Bpred%7D%2C%20y_i%5E%7Btrue%7D%29)
+
+when this loss function is hinge loss, it is exactly svm's loss function:
+
+![equation](https://latex.codecogs.com/gif.latex?l%20%3D%20max%280%2C%201%20-%20y_i%5E%7Bpred%7Dy_i%5E%7Btrue%7D%20%29%20%3D%20max%280%2C%201%20-%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5Ccdot%20x_i*y_i%29)
+
+then add l2 norm, the final loss function is :
+
+![equation](https://latex.codecogs.com/gif.latex?l%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7Dmax%280%2C%201%20-%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5Ccdot%20x_i*y_i%29%20&plus;%20%5Clambda%20%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5E%7B2%7D)
+
+#### How to calculate gradient
+
+We can use Chain rule to compute the derivative:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Cvec%7Bw%7D%7D%20%3D%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%28%5Cvec%7Bw%7D%5Ccdot%20x%29%7D%5Cfrac%7B%5Cpartial%20%28%5Cvec%7Bw%7D%5Ccdot%20x%29%7D%7B%5Cpartial%20%28%5Cvec%7Bw%7D%29%7D%20&plus;%202%5Clambda%20%5Cvec%7Bw%7D)
+
+then calculate derivatives for two parts:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%28%5Cvec%7Bw%7D%5Ccdot%20x%29%7D%20%3D%20%5Cfrac%7B%5Cpartial%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7Dmax%280%2C%201-%20%5Cvec%7Bw%7D%5Ccdot%20x_i*y_i%20%5E%7Btrue%7D%29%7D%7B%5Cpartial%20%28%5Cvec%7Bw%7D%5Ccdot%20x_i%29%7D%20%5C%5C%20%5Cfrac%7B%5Cpartial%20%28%5Cvec%7Bw%7D%5Ccdot%20x%29%7D%7B%5Cpartial%20%5Cvec%7Bw%7D%7D%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7Dx_i%20%5Cend%7Balign%7D)
+
+In conclusion, the final gradient is :
+(1)if ![equation](https://latex.codecogs.com/gif.latex?%281-%20%5Cvec%7Bw%7D%5Ccdot%20x_i*y_i%20%5E%7Btrue%7D%29%20%3C%200):
+
+below fomula(1) = 0, which means the derivative = 0
+
+(2)if ![equation](https://latex.codecogs.com/gif.latex?%281-%20%5Cvec%7Bw%7D%5Ccdot%20x_i*y_i%20%5E%7Btrue%7D%29%20%3E%20%3D%200):
+
+below fomula(1) = ![equation](https://latex.codecogs.com/gif.latex?-%20y_i%20%5E%7Btrue%7D), which means the derivative = ![equation](https://latex.codecogs.com/gif.latex?%5Csum_%7Bi%20%3D%200%7D%5E%7Bn%7D-%20y_i%20%5E%7Btrue%7Dx_i&plus;2%5Clambda%20%5Cvec%7Bw%7D)
+
+then add l2 norm, the final derivatives can be written as:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%200&plus;%202%5Clambda%20%5Cvec%7Bw%7D%20%26%20%2Cif%20%281-%20y_i%20%5E%7Btrue%7D*%5Cvec%7Bw%7D%5Ccdot%20x_i%29%20%3C0%5C%5C%20%5Csum_%7Bi%20%3D%200%7D%5E%7Bn%7D-%20y_i%20%5E%7Btrue%7Dx_i&plus;2%5Clambda%20%5Cvec%7Bw%7D%26%20%2Cif%20%281-%20y_i%20%5E%7Btrue%7D*%5Cvec%7Bw%7D%5Ccdot%20x_i%29%20%3E%3D0%20%5Cend%7Bmatrix%7D%5Cright.)
+
+
+#### Implement code via Pyspark 
+
+***Check [here]()***
+
+### multiple class svm 
+
+Different from binary-class svm, multi-class svm's loss function requires the score on the correct class always be Δ(a boundary value) higher than scores on incorrect classes.
+
+Suppose there is a dataset, the ith entity xi contains its features(has d features represent as vector) and class yi, then given svm model f(xi,w) to calculate the scores(as vector) in all classes,here we use si to represent this vector.
+
+#### loss function
+
+According to the definition of multi-class svm, we can get loss fucntion:
+
+![equation](https://latex.codecogs.com/gif.latex?l_i%20%3D%20%5Csum_%7Bi%5Cneq%20y_i%7D%5E%7Bd%7Dmax%280%2Cs_j%20-%20s_y_i&plus;%5CDelta%20%29)
+
+For example:
+
+Suppose there are 3 classes, for the ith sample xi, we get scores = [12,-7,10],where the first class(yi) is correct.Then we make Δ=9, applying the below loss function, we can calculate the loss of xi:
+
+![equation](https://latex.codecogs.com/gif.latex?l_i%20%3D%20max%280%2C%20-7-12&plus;9%29&plus;max%280%2C%2010-12&plus;9%29)
+
+As w is a vector in loss function, we expend loss function:
+
+![equation](https://latex.codecogs.com/gif.latex?l_i%20%3D%20%5Csum_%7Bi%5Cneq%20y_i%7D%5E%7Bd%7Dmax%280%2C%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%20%29)
+
+Then add l2 norm:
+
+![equation](https://latex.codecogs.com/gif.latex?l_i%20%3D%20%5Csum_%7Bi%5Cneq%20y_i%7D%5E%7Bd%7Dmax%280%2C%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20&plus;%20%5Clambda%20%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5E2)
+
+#### How to calculate gradient
+
+As yi and j are different, we calculate wyi's derivative for ith sample xi first:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l_i%7D%7B%5Cpartial%20%5Cvec%7Bw_y_i%7D%7D%20%26%3D%20%5Cfrac%7B%5Cpartial%20%5Csum_%7Bi%5Cneq%20y_i%7D%5E%7Bd%7Dmax%280%2C%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20&plus;%20%5Clambda%20%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5E2%7D%7B%5Cpartial%20%5Cvec%7Bw_y_i%7D%7D%20%5Cnonumber%5C%5C%20%26%3D%20%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%20-x_i&plus;%202%5Clambda%20%5Cvec%7Bw_y_i%7D%26%2C%20if%20%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20%3E%3D0%5C%5C%200&plus;2%5Clambda%20%5Cvec%7Bw_y_i%7D%26%20%2Cif%20%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20%3C0%20%5Cend%7Bmatrix%7D%5Cright.%20%5Cnonumber%20%5Cend%7Balign%7D)
+
+then calculate wj's derivative for ith sample xi:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l_i%7D%7B%5Cpartial%20%5Cvec%7Bw_j%7D%7D%20%26%3D%20%5Cfrac%7B%5Cpartial%20%5Csum_%7Bi%5Cneq%20y_i%7D%5E%7Bd%7Dmax%280%2C%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20&plus;%20%5Clambda%20%5Cleft%20%5C%7C%20%5Cvec%7Bw%7D%20%5Cright%20%5C%7C%5E2%7D%7B%5Cpartial%20%5Cvec%7Bw_j%7D%7D%20%5Cnonumber%5C%5C%20%26%3D%20%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%20x_i&plus;%202%5Clambda%20%5Cvec%7Bw_j%7D%26%2C%20if%20%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20%3E%3D0%5C%5C%200&plus;2%5Clambda%20%5Cvec%7Bw_j%7D%26%20%2Cif%20%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29%20%3C0%20%5Cend%7Bmatrix%7D%5Cright.%20%5Cnonumber%20%5Cend%7Balign%7D)
+
+The gradient of vector w contians wj(from 1 to d) and each wj's value depends on the value of ![equation](https://latex.codecogs.com/gif.latex?%28%5Cvec%7Bw_j%7D%5E%7BT%7Dx_i%20-%20%5Cvec%7Bw_y_i%7D%5E%7BT%7Dx_i%20&plus;%5CDelta%29):
+
+![equation](https://latex.codecogs.com/gif.latex?%5CDelta%20w_i%20%3D%20%5Bw_1%5E%7Bi%7D%3D%20%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%20x_i%5C%5C%20-x_i%5C%5C%200%20%5Cend%7Bmatrix%7D%5Cright....w_1%5E%7Bi%20%7D%20%3D%20%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%20x_i%5C%5C%20-x_i%5C%5C%200%20%5Cend%7Bmatrix%7D%5Cright.%5D)
+
+So the gradient for batch of data can be written as:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Cvec%7Bw%7D%7D%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5CDelta%20%5Cvec%7Bw_i%7D%20&plus;%202%5Clambda%20%5Cvec%7Bw%7D)
+
+#### Implement code via Pyspark 
+
+***Check [here]()***
+
+
 
 
 ## Optimizer
