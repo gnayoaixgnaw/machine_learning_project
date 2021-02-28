@@ -440,15 +440,11 @@ To deal with this issue, we can use **SGDM**, **Adagrad(adaptive gradient algori
 
 SGDM is SGD with momentum.It implement momentum to gradient:
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20&plus;%20%5Ceta%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20&plus;%20m_j%20%5Cnonumber%20%5Cend%7Balign%7D)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20&plus;%20%5Ceta%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20&plus;%20m_j%5Cnonumber%20%5Cend%7Balign%7D)
 	
-	here m0 = 0
+	where m0 = 0, λ is momentum's coefficent, η is learing rate.
 
-so based on the below fomula, we need to know v0,v1,v2:
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20v_0%20%3D%200%5Cnonumber%20%5C%5C%20v_1%20%3D%20-%5Ceta%20%5CDelta%20l%28x_0%29%5Cnonumber%20%5C%5C%20v_2%20%3D%20%5Clambda%20v_1%20-%20%5Ceta%20%5CDelta%20l%28x_1%29%20%3D%20-%20%5Clambda%5Ceta%20%5CDelta%20l%28x_0%29%20-%20%5Ceta%20%5CDelta%20l%28x_1%29%5Cnonumber%20%5Cend%7Balign%7D)
-
-	where λ is weight decay(the earlier iteration will have less influence), η is learning rate.
 
 visualization:
 
@@ -564,7 +560,7 @@ This graph illustrates that SGDM is always used in computer vision whereas Adam 
 
 For Adam, there are ***SWATS***,***AMSGrad***,***AdaBound***,and ***AdamW***.
 
-For SGDM, there are ***SGDMW***
+For SGDM, there are ***SGDMW***,***SGDNM***
 
 #### SWATS
 
@@ -592,12 +588,22 @@ Add weight decay to Adam:
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5E%7Bi%7D%5Cleftarrow%20%5Cbeta_1%20m_j%20%5E%7Bi-1%7D&plus;%281-%5Cbeta%20_1%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5Cnonumber%5C%5C%20h_j%5E%7Bi%7D%20%5Cleftarrow%20%5Cbeta_2%20h_%7Bj%7D%5E%7Bi-1%7D&plus;%281-%5Cbeta%20_2%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%5Cnonumber%5C%5C%20AdamW%20%3A%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20-%20%5Ceta%20%28%5Cfrac%7B1%7D%7B%5Csqrt%7Bh_j&plus;c%7D%7Dm_j&plus;%5Cgamma%20%5Ctheta%20_j%20%29%5Cnonumber%20%5Cend%7Balign%7D)
 
-#### SGDW
+
+
+#### SGDMW
 
 Add weight decay to SGDM:
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20&plus;%20%5Ceta%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20&plus;%20m_j%20&plus;%5Cgamma%20%5Ctheta%20_j%20%5Cnonumber%20%5Cend%7Balign%7D)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20&plus;%20%5Ceta%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20&plus;%20m_j&plus;%20%5Cgamma%20%5Ctheta%20_j%5Cnonumber%20%5Cend%7Balign%7D)
 
+	where m0 = 0, λ is momentum's coefficent, η is learing rate, γ is weight decay coefficent.
+
+
+#### SGDMN
+
+SGDMN is aimed to solve local optimal problem.When local optimal problem happend, SGDMN will do an additional calculation to determine whether to stop iteration:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20&plus;%20m_j%20%5Cnonumber%5C%5C%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20&plus;%20%5Ceta%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20&plus;%20m_j%20%5Cnonumber%20%5Cend%7Balign%7D)
 
 
 
