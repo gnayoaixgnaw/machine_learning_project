@@ -440,7 +440,9 @@ To deal with this issue, we can use **SGDM**, **Adagrad(adaptive gradient algori
 
 SGDM is SGD with momentum.It implement momentum to gradient:
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20v_i%20%3D%20%5Clambda%20v_%7Bi-1%7D%20&plus;%20%5Ceta%20%5CDelta%20l%28x_%7Bi-1%7D%29%5Cnonumber%20%5C%5C%20%5CDelta%20l%28x_%7Bi%7D%29%3D%20%5CDelta%20l%28x_%7Bi-1%7D%29%20&plus;%20v_i%20%5Cnonumber%20%5Cend%7Balign%7D)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20&plus;%20%5Ceta%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20&plus;%20m_j%20%5Cnonumber%20%5Cend%7Balign%7D)
+	
+	here m0 = 0
 
 so based on the below fomula, we need to know v0,v1,v2:
 
@@ -594,17 +596,14 @@ Add weight decay to Adam:
 
 Add weight decay to SGDM:
 
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Clambda%20m_%7Bj%7D%20&plus;%20%5Ceta%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%5Cnonumber%20%5C%5C%20%5Ctheta%20_j%20%5Cleftarrow%20%5Ctheta%20_j%20&plus;%20m_j%20&plus;%5Cgamma%20%5Ctheta%20_j%20%5Cnonumber%20%5Cend%7Balign%7D)
 
 
-Now I tested these optimizers on MNIST and IMDB movie reviews,lets see the differenes of those optimizers:
 
-for MNIST:
 
-![mnist](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/mnist.png) 
+comparation between these optimizers ,lets see the differenes of those optimizers:
 
-for IMDB:
-
-![imbd](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/imbd.png) 
+![image](https://miro.medium.com/max/892/1*63HMdMyw_XDcNkRCQ1nrpw.png) 
 
 
 ### Now I will share a kaggle project based on ML:
