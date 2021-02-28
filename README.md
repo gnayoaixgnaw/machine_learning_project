@@ -395,14 +395,10 @@ Variations of Gradient Descent depends on size of data that be used in each iter
 
 The learning rate is a vital parameter in gradient descent as learning rate is responsible for convergence, if lr is small, convergent speed will be slow, on the contrary,when lr is large, function will converge very fast.
 
-small learning rate:
+compare different learning rate:
 
-![small_lr](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/lr_small.png) 
+![image](https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F1217276%2F201810%2F1217276-20181007182807634-196732269.png&refer=http%3A%2F%2Fimg2018.cnblogs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617069776&t=b25621a89b513f8b765ac8f116bee051) 
 
-large learning rate:
-
-
-![large_lr](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/lr_large.png) 
 
 So how to find a proper learning rate? If we set lr a large value, the function will converge very fast at beginning but may miss the optimal solution,but if we set a small value, it will cost too much time to converge.
 
