@@ -434,7 +434,24 @@ Those graphs illustrate the advantages of Time-Based Decay lr vs constant lr:
 
 Also, we know that the weights for each coefficent is different, which means gradients of some coefficents are large while some are little.So in traditional SGD, changes of coefficents are not synchronous.So we need to balance the coefficents when doing gradient descent.
 
-To deal with this issue, we can use **Adagrad(adaptive gradient algorithm)**, **RMSProp**, **Adam**
+To deal with this issue, we can use **SGDM**, **Adagrad(adaptive gradient algorithm)**, **RMSProp**, **Adam**
+
+### SGDM
+
+SGDM is SGD with momentum.It implement momentum to gradient:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20v_i%20%3D%20%5Clambda%20v_%7Bi-1%7D%20&plus;%20%5Ceta%20%5CDelta%20l%28x_%7Bi-1%7D%29%5Cnonumber%20%5C%5C%20%5CDelta%20l%28x_%7Bi%7D%29%3D%20%5CDelta%20l%28x_%7Bi-1%7D%29%20&plus;%20v_i%20%5Cnonumber%20%5Cend%7Balign%7D)
+
+so based on the below fomula, we need to know v0,v1,v2:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20v_0%20%3D%200%5Cnonumber%20%5C%5C%20v_1%20%3D%20-%5Ceta%20%5CDelta%20l%28x_0%29%5Cnonumber%20%5C%5C%20v_2%20%3D%20%5Clambda%20v_1%20-%20%5Ceta%20%5CDelta%20l%28x_1%29%20%3D%20-%20%5Clambda%5Ceta%20%5CDelta%20l%28x_0%29%20-%20%5Ceta%20%5CDelta%20l%28x_1%29%5Cnonumber%20%5Cend%7Balign%7D)
+
+	where λ is weight decay(the earlier iteration will have less influence), η is learning rate.
+
+visualization:
+
+![image](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbnRyYW5ldHByb3h5LmFsaXBheS5jb20vc2t5bGFyay9sYXJrLzAvMjAyMC9wbmcvOTMwNC8xNTk4NTIxNDQ4NTQwLWViMjEwNTQ5LWNiOTMtNDIxMC05NDJmLTg2Mzk0Y2Y4Njk5ZC5wbmc?x-oss-process=image/format,png#align=left&display=inline&height=306&margin=%5Bobject%20Object%5D&name=image.png&originHeight=682&originWidth=1080&size=488854&status=done&style=none&width=484wZw#pic_center)
+
 
 ### Adagrad
 
@@ -529,6 +546,28 @@ def Adam(x, y, lr=0.01, iter_count=500, batch_size=4, beta1=0.9,beta2 = 0.999):
             end -= length
     return w
 ```
+
+### how to choose optimizer
+
+By far, the most popular models are SGDM and Adam.
+
+![image](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbnRyYW5ldHByb3h5LmFsaXBheS5jb20vc2t5bGFyay9sYXJrLzAvMjAyMC9wbmcvOTMwNC8xNTk4NTIzMDIxNTA5LTMyNTI1OGIwLTI5NzItNGNiNy04MDhkLTg4OTQ0Mzk0MWE3ZC5wbmc?x-oss-process=image/format,png#align=left&display=inline&height=302&margin=%5Bobject%20Object%5D&name=image.png&originHeight=604&originWidth=1074&size=76636&status=done&style=none&width=537wZw#pic_center)
+
+This graph illustrates that SGDM is always used in computer vision whereas Adam are popular in NLP.
+
+
+### optimize Adam and SGDM
+
+#### SWATS
+
+combine Adam and SGDM:
+
+![image](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbnRyYW5ldHByb3h5LmFsaXBheS5jb20vc2t5bGFyay9sYXJrLzAvMjAyMC9wbmcvOTMwNC8xNTk4NTI0MjE0NzU0LTkwY2VlMmE0LTFiZWYtNGRhNC1hY2M5LTljYjVhMjE2ZTBmMS5wbmc?x-oss-process=image/format,png#align=left&display=inline&height=146&margin=%5Bobject%20Object%5D&name=image.png&originHeight=292&originWidth=1066&size=43146&status=done&style=none&width=533wZw#pic_center)
+
+#### AMSGrad
+
+
+
 
 Now I tested these optimizers on MNIST and IMDB movie reviews,lets see the differenes of those optimizers:
 
