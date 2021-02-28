@@ -506,13 +506,13 @@ def RMSprop(x, y, lr=0.01, iter_count=500, batch_size=4, beta=0.9):
 ```
 ### Adam
 
-***Adam*** is another powerful optimizer.It not only saved the sum of square of history gradients(h2 )but also save sum of history gradients(h1 ):
+***Adam*** is another powerful optimizer.It not only saved the sum of square of history gradients(h) but also save sum of history gradients(m, known as momentum):
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20h1_j%20%5Cleftarrow%20%5Cbeta1%20h_j%20&plus;%281-%5Cbeta1%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%20%5Cnonumber%5C%5C%20h2_j%20%5Cleftarrow%20%5Cbeta2%20h_j%20&plus;%281-%5Cbeta2%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%20%5Cnonumber%20%5Cend%7Balign%7D)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Cbeta_1%20m_j%20&plus;%281-%5Cbeta%20_1%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5Cnonumber%5C%5C%20h_j%20%5Cleftarrow%20%5Cbeta_2%20h_j%20&plus;%281-%5Cbeta%20_2%29%28%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%29%5E%7B2%7D%5Cnonumber%20%5Cend%7Balign%7D)
 	
-    If h1 and h2 are initialized to the 0 vectors, they are biased to 0, so bias correction is done to offset these biases by calculating the bias corrected h1 and h2:
+    If m and h are initialized to the 0 vectors, they are biased to 0, so bias correction is done to offset these biases by calculating the bias corrected m and h:
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20h1_j%20%5Cleftarrow%20%5Cfrac%7Bh1_j%7D%7B1%20-%5Cbeta1%20%5E%7Bt%7D%7D%20%5Cnonumber%5C%5C%20h2_j%20%5Cleftarrow%20%5Cfrac%7Bh2_j%7D%7B1%20-%5Cbeta2%20%5E%7Bt%7D%7D%20%5Cnonumber%5C%5C%20%5Ctheta%20_i%20%5Cleftarrow%20%5Ctheta%20_i%20-%20%5Cfrac%7B%5Cmu%20%7D%7B%5Csqrt%7Bh2_j%7D&plus;c%7Dh1_j%20%5Cnonumber%20%5Cend%7Balign%7D)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20m_j%20%5Cleftarrow%20%5Cfrac%7Bm_j%7D%7B1-%5Cbeta%20_1%5E%7Bt%7D%7D%5Cnonumber%5C%5C%20h_j%20%5Cleftarrow%20%5Cfrac%7Bh_j%7D%7B1-%5Cbeta%20_2%5E%7Bt%7D%7D%5Cnonumber%20%5Cend%7Balign%7D)
     
     t means t th iteration.
     
@@ -524,19 +524,19 @@ def Adam(x, y, lr=0.01, iter_count=500, batch_size=4, beta1=0.9,beta2 = 0.999):
     length, features = x.shape
     data = np.column_stack((x, np.ones((length, 1))))
     w = np.zeros((features + 1, 1))
-    h1, h2,eta = 0, 0,10e-7
+    m, h,eta = 0, 0,10e-7
     start, end = 0, batch_size
     for i in range(iter_count):
         # calculate gradient
         dw = np.sum((np.dot(data[start:end], w) - y[start:end]) * data[start:end], axis=0) / length        
         # calculate sums
-        h1 = beta1 * h + (1 - beta1) * dw
-	h2 = beta2 * h + (1 - beta2) * np.dot(dw, dw)
+        m = beta1 * m + (1 - beta1) * dw
+	h = beta2 * h + (1 - beta2) * np.dot(dw, dw)
 	# bias correction
-	h1 = h1/(1- beta1)
-	h2 = h2/(1- beta2)
+	m = m/(1- beta1)
+	h = h/(1- beta2)
         # update w
-        w = w - (lr / np.sqrt(eta + h2)) * h1.reshape((features + 1, 1))
+        w = w - (lr / np.sqrt(eta + h)) * m.reshape((features + 1, 1))
 	
         start = (start + batch_size) % length
         if start > length:
