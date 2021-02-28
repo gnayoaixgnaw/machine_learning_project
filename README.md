@@ -310,13 +310,13 @@ In conclusion, the final gradient is :
 
 (1)if ![equation](https://latex.codecogs.com/gif.latex?%281-%20%5Cvec%7Bw%7D%5Ccdot%20x_i*y_i%20%5E%7Btrue%7D%29%20%3C%200):
 
-below fomula(1) = 0, which means the derivative = 0
+below fomula(1) = 0, which means the derivative = ![equation](https://latex.codecogs.com/gif.latex?0&plus;%202%5Clambda%20%5Cvec%7Bw%7D)
 
 (2)if ![equation](https://latex.codecogs.com/gif.latex?%281-%20%5Cvec%7Bw%7D%5Ccdot%20x_i*y_i%20%5E%7Btrue%7D%29%20%3E%20%3D%200):
 
 below fomula(1) = ![equation](https://latex.codecogs.com/gif.latex?-%20y_i%20%5E%7Btrue%7D), which means the derivative = ![equation](https://latex.codecogs.com/gif.latex?%5Csum_%7Bi%20%3D%200%7D%5E%7Bn%7D-%20y_i%20%5E%7Btrue%7Dx_i&plus;2%5Clambda%20%5Cvec%7Bw%7D)
 
-then add l2 norm, the final derivatives can be written as:
+then the final derivatives can be written as:
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%200&plus;%202%5Clambda%20%5Cvec%7Bw%7D%20%26%20%2Cif%20%281-%20y_i%20%5E%7Btrue%7D*%5Cvec%7Bw%7D%5Ccdot%20x_i%29%20%3C0%5C%5C%20%5Csum_%7Bi%20%3D%200%7D%5E%7Bn%7D-%20y_i%20%5E%7Btrue%7Dx_i&plus;2%5Clambda%20%5Cvec%7Bw%7D%26%20%2Cif%20%281-%20y_i%20%5E%7Btrue%7D*%5Cvec%7Bw%7D%5Ccdot%20x_i%29%20%3E%3D0%20%5Cend%7Bmatrix%7D%5Cright.)
 
