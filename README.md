@@ -374,6 +374,71 @@ So the gradient for ***batch of data*** can be written as:
 ***Check [here]()***
 
 
+## Naive Bayes
+
+Naive Bayes is based on Bayes' theorem, which is :
+
+![equation](https://latex.codecogs.com/gif.latex?P%28Y_k%7CX%29%20%3D%20%5Cfrac%7BP%28X%7CY_k%29P%28Y_k%29%7D%7B%5Csum_%7Bk%7D%5E%7B%7DP%28X%7CY%20%3D%20Y_k%29P%28Y_k%29%7D)
+
+we suppose dataset has m entities, each entitiy has n dimensions.There are k classes, define as :
+	
+
+![equation](https://latex.codecogs.com/gif.latex?%28x_1%5E%7B1%7D%2Cx_2%5E%7B1%7D%2C...x_n%5E%7B1%7D%2C%20y_1%29%2C%28x_1%5E%7B2%7D%2Cx_2%5E%7B2%7D%2C...x_n%5E%7B2%7D%2C%20y_2%29%2C...%2C%28x_1%5E%7Bm%7D%2Cx_2%5E%7Bm%7D%2C...x_n%5E%7Bm%7D%20%2C%20y_m%29)
+
+We can get p(X,Y)'s joint probability via Bayes' theorem:
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20P%28X%2CY%3DC_k%29%20%26%3D%20P%28Y%20%3D%20C_k%29P%28X%3Dx%7CY%20%3D%20C_k%29%5Cnonumber%20%5C%5C%20%26%20%3D%20P%28Y%20%3D%20C_k%29P%28X_1%3Dx_1%2CX_2%3Dx_2%2C...X_n%3Dx_n%7CY%20%3D%20C_k%29%5Cnonumber%20%5Cend%7Balign%7D)
+
+Suppose n dimensions in entity are independent of each other :
+
+![equation](https://latex.codecogs.com/gif.latex?P%28X_1%3Dx_1%2CX_2%3Dx_2%2C...X_n%3Dx_n%7CY%20%3D%20C_k%29%5C%5C%20%3D%20P%28X_1%3Dx_1%7CY%20%3D%20C_k%29P%28X_2%3Dx_2%7CY%20%3D%20C_k%29...P%28X_n%3Dx_n%7CY%20%3D%20C_k%29)
+
+Notice some dimentions are discrete type，while others are continuous type,
+
+suppose ***Sck*** is subset where item's class is Ck, ***S k,xi*** is subset of Sk where item's i dimension is xi.
+
+***discrete type***
+
+![eqution](https://latex.codecogs.com/gif.latex?P%28x_i%7CY%20%3D%20C_k%29%20%3D%20%5Cfrac%7B%7CS_%7Bk%2Cx_i%7D%7C%7D%7B%7CS_k%7C%7D)
+
+***continuous type***
+
+Suppose Sk,xi  are subject to Gaussian distribution：
+
+![equation](https://latex.codecogs.com/gif.latex?P%28x_i%7CY%20%3D%20C_k%29%20%5Csim%20N%28%5Cmu%20_%7BC_k%2Ci%7D%2C%5Csigma_%7BC_k%2Ci%7D%5E%7B2%7D%29)
+
+then we can get:
+
+![equation](https://latex.codecogs.com/gif.latex?P%28x_i%7CY%20%3D%20C_k%29%20%3D%20%5Cfrac%7B1%7D%7B%5Csqrt%7B2%5Cpi%20%5Csigma%20_%7BC_k%2Ci%7D%7D%7De%5E%7B-%5Cfrac%7B%28x-%5Cmu%20_%7BC_k%2Ci%7D%29%5E2%7D%7B2%5Csigma%20_%7BC_k%2Ci%7D%5E2%7D%7D)
+
+After comparing p(X,Y) in all classes, we can get the result class which has the highest p(X,Y).
+
+
+### Laplacian correction
+
+For example, if there is no sample(which belongs to Ck and ith dimension is Xa), then ![equation](https://latex.codecogs.com/gif.latex?P%28X%20%3D%20X_a%7CY%20%3D%20C_k%29%20%3D%200).
+
+Becasue of the continued product, ![equation](https://latex.codecogs.com/gif.latex?P%28X%2CY%20%3D%20C_k%29%20%3D%200)
+
+use laplacian correction:
+
+![equation](https://latex.codecogs.com/gif.latex?P%28Y%20%3D%20C_k%29%20%3D%20%5Cfrac%7B%7CS_%7BC_k%7D%7C&plus;1%7D%7B%7CS%7C&plus;N%7D)
+	
+	where |Sck| is the number of subset Sck(where items are class ck) , |S| is number of whole dataset, N is the number of classes 
+	
+![equation](https://latex.codecogs.com/gif.latex?P%28x_i%7CY%20%3D%20C_k%29%20%3D%20%5Cfrac%7B%7CS_%7BC_%7Bk%2Cx_i%7D%7D%7C&plus;1%7D%7B%7CS_%7BC_k%7D%7C&plus;N_i%7D)
+
+	where |S k,xi| is the number of the subset of Sck where item's i dimension is xi, Ni is the number of possible value of ith attribute.
+
+
+### GaussianNB，MultinomialNB, BernoulliNB
+
+MultinomialNB is naive Bayes with a priori Gaussian distribution, multinomialNB is naive Bayes with a priori multinomial distribution and BernoullinB is naive Bayes with a priori Bernoulli distribution.
+
+These three classes are applicable to different classification scenarios. In general, if the distribution of sample features is mostly continuous values, Gaussiannb is better. MultinomialNb is appropriate if the most of the sample features are multivariate discrete values. If the sample features are binary discrete values or very sparse multivariate discrete values, Bernoullinb should be used.
+
+
+
 
 
 ## Optimizer
