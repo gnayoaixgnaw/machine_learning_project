@@ -400,9 +400,10 @@ compare different learning rate:
 ![image](https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F1217276%2F201810%2F1217276-20181007182807634-196732269.png&refer=http%3A%2F%2Fimg2018.cnblogs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617069776&t=b25621a89b513f8b765ac8f116bee051) 
 
 
-So how to find a proper learning rate? If we set lr a large value, the function will converge very fast at beginning but may miss the optimal solution,but if we set a small value, it will cost too much time to converge.
+So how to find a proper learning rate? If we set lr a large value, the function will converge very fast at beginning but may miss the optimal solution,but if we set a small value, it will cost too much time to converge. As iterations going on, we hope that learning rate becomes smaller.Because when function close to optimal solution, the changing step should be small to find best solution.So we need to gradually change learning rate.
 
->Here I choose a very simple method, which name is ***Bold Driver*** to change learning rate dynamicly:
+
+>Here is a very simple method, which name is ***Bold Driver*** to change learning rate dynamicly:
 >
 >At each iteration, compute the cost l(θ0,θ1...)
 >
@@ -416,13 +417,22 @@ So how to find a proper learning rate? If we set lr a large value, the function 
 >l = 0.5 * l
 >If cost increases, decrease rate
 
-This graph illustrate the advantages of adaptive lr vs constant lr:
+A better method is ***Time-Based Decay*** .The mathematical form of time-based decay is lr = lr0/(1+kt)
 
-![different](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/adaptivelr.png) 
+	where lr, k are hyperparameters and t is the iteration number. 
+
+Those graphs illustrate the advantages of Time-Based Decay lr vs constant lr:
+
+***constant lr***
+
+![image](https://miro.medium.com/max/864/1*Lv7-jMtHOoucryv9mUtFGg.jpeg) 
 
 
+***Time-Based Decay lr***
 
-As iterations going on, we hope that learning rate becomes smaller.Because when function close to optimal solution, the changing step should be small to find best solution.So we need to gradually change learning rate.Also, we know that the weights for each coefficent is different, which means gradients of some coefficents are large while some are little.So in traditional SGD, changes of coefficents are not synchronous.So we need to distribute the coefficents which has large changes a small leanrning rate.
+![image](https://miro.medium.com/max/864/1*YpzU0MkpNaZ8f6cGvqex7g.jpeg)
+
+Also, we know that the weights for each coefficent is different, which means gradients of some coefficents are large while some are little.So in traditional SGD, changes of coefficents are not synchronous.So we need to balance the coefficents when doing gradient descent.
 
 To deal with this issue, we can use **Adagrad(adaptive gradient algorithm)**, **RMSProp**, **Adam**
 
