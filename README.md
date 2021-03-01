@@ -98,7 +98,7 @@ Suppose ▽l(θ) is a vector whose ith entry is ith partial derivative evaluated
 
 ![pseudocode](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/pseudocode1.png)
 
-    • Here l is the ”learning rate” and controls speed of convergence
+    • Here λ is the ”learning rate” and controls speed of convergence
     • ▽l(θ iter) is the gradient of L evaluated at iteration ”iter” with parameter of qiter
     • Stop conditions can be different
     
