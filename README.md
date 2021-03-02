@@ -223,10 +223,7 @@ The parameter ω is related to X that is, assuming X is vector-valued and ω can
 
 Now its time to implement Log-likelihood in logistic regression, written as:
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20L%28p%7Cx_1%2Cx_2...%2Cx_n%2C%20y_1%2Cy_2...%2Cy_n%29%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D
-%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Clog%20%5Cfrac%7Be%5E%7B%5Comega%20_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D&plus;%281-y_i%29%5Clog%20%281-%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D
-%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%28%5Clog%20e%5E%7B%5Comega_i%7D%29-%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%5Cfrac%7B1%7D%7Bn%7D
-%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Comega_i-%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5Cend%7Balign%7D)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20L%28p%7Cx_1%2Cx_2...%2Cx_n%2C%20y_1%2Cy_2...%2Cy_n%29%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Clog%20%5Cfrac%7Be%5E%7B%5Comega%20_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D&plus;%281-y_i%29%5Clog%20%281-%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%28%5Clog%20e%5E%7B%5Comega_i%7D%29-%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Comega_i-%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5Cend%7Balign%7D)
 
 	
 Now calculate loss function.As gradient descent need to minimize loss function,the loss function should be negative LLH:
