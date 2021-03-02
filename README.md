@@ -94,24 +94,7 @@ Suppose ▽l(θ) is a vector whose ith entry is ith partial derivative evaluated
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5CDelta%20l%28%5Ctheta%29%20%3D%20%5Cbegin%7Bbmatrix%7D%5Cnonumber%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_0%7D%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%5C%5C%20.%5C%5C%20.%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%5C%5C%20%5Cend%7Bbmatrix%7D%20%5Cend%7Balign%7D)
 
-**Gradient Descent pseudocode**
-
-![pseudocode](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/pseudocode1.png)
-
-    • Here λ is the ”learning rate” and controls speed of convergence
-    • ▽l(θ iter) is the gradient of L evaluated at iteration ”iter” with parameter of qiter
-    • Stop conditions can be different
-    
-   **When to stop**
-
-      Stop condition can be different, for example:
-        • Maximum number of iteration is reached (iter < MaxIteration)
-        • Gradient ▽l(θ iter ) or parameters are not changing (||θ(iter+1) - θ(iter)|| < precisionValue)
-        • Cost is not decreasing (||l(θ(iter+1)) - L(θ(iter))|| < precisionValue)
-        • Combination of the above
         
-**Gradient Descent calculation**
-
 In privious sessions, we got the loss function, which is   
   
 
@@ -127,8 +110,24 @@ Since it has mutiple dimensions,we compute partial derivatives:
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%20%3D%20-%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7B1%7D%5E%7Bn%7D%20x_%7B1%7D%5E%7B%28i%29%7D%28y%5E%7B%28i%29%7D%20-%20%28%5Ctheta%20_0&plus;%5Ctheta%20_1x_1%5E%7B%28i%29%7D%20&plus;%20...&plus;%20%5Ctheta%20_dx_d%5E%7B%28i%29%7D%20%29%5Cnonumber%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_2%7D%20%3D%20-%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7B1%7D%5E%7Bn%7D%20x_%7B2%7D%5E%7B%28i%29%7D%28y%5E%7B%28i%29%7D%20-%20%28%5Ctheta%20_0&plus;%5Ctheta%20_1x_1%5E%7B%28i%29%7D%20&plus;%20...&plus;%20%5Ctheta%20_dx_d%5E%7B%28i%29%7D%20%29%5Cnonumber%5C%5C%20...%5Cnonumber%5C%5C%20%5Cfrac%7B%5Cpartial%20l%28%5Ctheta%29%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%20%3D%20-%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7B1%7D%5E%7Bn%7D%20x_%7Bd%7D%5E%7B%28i%29%7D%28y%5E%7B%28i%29%7D%20-%20%28%5Ctheta%20_0&plus;%5Ctheta%20_1x_1%5E%7B%28i%29%7D%20&plus;%20...&plus;%20%5Ctheta%20_dx_d%5E%7B%28i%29%7D%20%29%5Cnonumber%20%5Cend%7Balign%7D)
 
 Now we can compute components of the gradients and then sum them up and update weights in the next iteration.
+
+#### Gradient Descent pseudocode**
+
+![pseudocode](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/pseudocode1.png)
+
+    • Here λ is the ”learning rate” and controls speed of convergence
+    • ▽l(θ iter) is the gradient of L evaluated at iteration ”iter” with parameter of qiter
+    • Stop conditions can be different
+    
+   **When to stop**
+
+      Stop condition can be different, for example:
+        • Maximum number of iteration is reached (iter < MaxIteration)
+        • Gradient ▽l(θ iter ) or parameters are not changing (||θ(iter+1) - θ(iter)|| < precisionValue)
+        • Cost is not decreasing (||l(θ(iter+1)) - L(θ(iter))|| < precisionValue)
+        • Combination of the above
  
-Here are more detailed pseudocode to compute gradient:
+more detailed pseudocode to compute gradient:
 
     // initialize parameters
     iteration = 0
@@ -248,7 +247,7 @@ Since it has mutiple dimensions,we compute partial derivatives:
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_1%5E%7B%28i%29%7D&plus;x_1%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_1%20%5Cnonumber%20%5C%5C%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_2%7D%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_2%5E%7B%28i%29%7D&plus;x_2%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_2%20%5Cnonumber%20%5C%5C%20...%20%5Cnonumber%20%5C%5C%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_d%5E%7B%28i%29%7D&plus;x_d%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_d%20%5Cnonumber%20%5Cend%7Balign%7D)
 	
 
-**Gradient Descent pseudocode in Pyspark**
+#### Gradient Descent pseudocode in Pyspark**
 
 ![pseudocode1](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/pseudocode2.png)
 
@@ -274,15 +273,25 @@ then we can get the loss function,which is also be called log-likelihood cost:
 
 	where 1{expression} is a function that if expression in {} is true then 1{expression} = 1 ,else 0.
 	
-then rearrange it :
+then rearrange it, and add l2 norm :
 
-![equation](https://latex.codecogs.com/gif.latex?J%28%5Ctheta%20%29%20%3D%20-%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5Csum_%7Bj%3D1%7D%5E%7Bk%7D1%5Cleft%20%5C%7B%20y%5E%7B%28i%29%7D%20%3D%20j%20%5Cright%20%5C%7D%5B%5Clog%20e%5E%7B%5Ctheta%20_j%5ET%7Dx%5E%7B%28i%29%7D-%20%5Clog%20%5Csum_%7Bl%3D1%7D%5E%7Bk%7De%5E%7B%5Ctheta%20_l%5ET%7Dx%5E%7B%28i%29%7D%5D)
+![equation](https://latex.codecogs.com/gif.latex?J%28%5Ctheta%20%29%20%3D%20-%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5Csum_%7Bj%3D1%7D%5E%7Bk%7D1%5Cleft%20%5C%7B%20y%5E%7B%28i%29%7D%20%3D%20j%20%5Cright%20%5C%7D%5B%5Clog%20e%5E%7B%5Ctheta%20_j%5ET%7Dx%5E%7B%28i%29%7D-%20%5Clog%20%5Csum_%7Bl%3D1%7D%5E%7Bk%7De%5E%7B%5Ctheta%20_l%5ET%7Dx%5E%7B%28i%29%7D%5D%5Clambda%20%5Csum_%7Bi%3D1%7D%5E%7Bk%7D%5Ctheta%20_i%5E%7B2%7D)
 
 #### How to calculate gradient
 
 Suppose θj is jth partial derivative :
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20J%28%5Ctheta%20%29%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%20%26%20%3D%20-%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Bx%5E%7B%28i%29%7D%20%281%5Cleft%20%5C%7B%20y%5E%7B%28i%29%7D%20%3D%20j%20%5Cright%20%5C%7D%20-%20%5Cfrac%7Be%5E%7B%5Ctheta%20_j%5ET%7Dx%5E%7B%28i%29%7D%7D%7B%5Csum_%7Bl%3D1%7D%5E%7Bk%7De%5E%7B%5Ctheta%20_l%5ET%7Dx%5E%7B%28i%29%7D%7D%29%5D%20&plus;%202%5Clambda%20%5Ctheta%20_j%5Cnonumber%5C%5C%20%26%3D%20-%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B%20x%5E%7B%28i%29%7D%20%281%5Cleft%20%5C%7B%20y%5E%7B%28i%29%7D%20%3D%20j%20%5Cright%20%5C%7D%20-%20p%28y%5E%7B%28i%29%7D%3Dj%7Cx%5E%7B%28i%29%7D%3B%5Ctheta%20%29%29%5D%20&plus;%202%5Clambda%20%5Ctheta%20_j%20%5Cnonumber%20%5Cend%7Balign%7D)
+
+
+#### Gradient Descent pseudocode in Pyspark**
+
+![pseudocode1](https://github.com/gnayoaixgnaw/machine_learning_project/blob/main/image/pseudocode2.png)
+
+
+#### Implement code via Pyspark 
+
+***Check [here]()***
 
 
 
@@ -358,6 +367,8 @@ then the final derivatives for ***batch of data*** can be written as:
 #### Implement code via Pyspark 
 
 ***Check [here]()***
+
+
 
 ### multiple class svm 
 
