@@ -187,7 +187,13 @@ In comparison with the iterative formula without adding L2 regularization, param
 	
 ## Logistic regression
 
-Logistic regression is supervised model especially for prediction problem.Suppose we have a prediction problem.It is natural to assume that output y (0/1) given the independent variable(s) X ,which has d dimensions and model parameter θ is sampled from the exponential family.
+Logistic regression is supervised model especially for prediction problem.It has binary-class lr and multi-class lr.
+
+
+### Binary-class logistic regression
+
+
+Suppose we have a prediction problem.It is natural to assume that output y (0/1) given the independent variable(s) X ,which has d dimensions and model parameter θ is sampled from the exponential family.
 
 It makes sense to assume that the x is sampled from a Bernoulli and here is the log-likelihood:
 
@@ -205,7 +211,7 @@ Given a bunch of data for example,suppose output Y has (0/1):
 	• If coefs are (1, 1), LLH is 394
 	
 
-However this is not enough to get the loss function, logistic regreesion needs a sigmoid function to show the probability of y = 0/1,which is :
+However this is not enough to get the loss function, logistic regreesion needs a ***sigmoid*** function to show the probability of y = 0/1,which is :
 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20P%28x_i%29%20%26%3D%20%5Cfrac%7B1%7D%7B1-e%5E%7B-y_i%7D%7D%5Cnonumber%20%5C%5C%20%26%3D%5Cfrac%7Be%5E%7B%5Ctheta%20_0&plus;%5Ctheta_1%20x_1&plus;...&plus;%5Ctheta_d%20x_d%7D%7D%7B1&plus;e%5E%7B%5Ctheta%20_0&plus;%5Ctheta_1%20x_1&plus;...&plus;%5Ctheta_d%20x_d%7D%7D%20%5Cnonumber%20%5Cend%7Balign%7D)
 
@@ -217,16 +223,19 @@ The parameter ω is related to X that is, assuming X is vector-valued and ω can
 
 Now its time to implement Log-likelihood in logistic regression, written as:
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20L%28p%7Cx_1%2Cx_2...%2Cx_n%2C%20y_1%2Cy_2...%2Cy_n%29%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Clog%20%5Cfrac%7Be%5E%7B%5Comega%20_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D&plus;%281-y_i%29%5Clog%20%281-%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%28%5Clog%20e%5E%7B%5Comega_i%7D%29-%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Comega_i-%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5Cend%7Balign%7D)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20L%28p%7Cx_1%2Cx_2...%2Cx_n%2C%20y_1%2Cy_2...%2Cy_n%29%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D
+%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Clog%20%5Cfrac%7Be%5E%7B%5Comega%20_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D&plus;%281-y_i%29%5Clog%20%281-%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D
+%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%28%5Clog%20e%5E%7B%5Comega_i%7D%29-%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%5Cfrac%7B1%7D%7Bn%7D
+%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Comega_i-%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5Cend%7Balign%7D)
 
 	
 Now calculate loss function.As gradient descent need to minimize loss function,the loss function should be negative LLH:
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20loss%20function%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Comega_i-%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B-%20y_i%5Comega_i%20&plus;%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5Cend%7Balign%7D)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20loss%20function%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_i%5Comega_i-%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B-%20y_i%5Comega_i%20&plus;%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5Cend%7Balign%7D)
 
 Appling regularization (l2 norm):
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20loss%20function%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B-%20y_i%5Comega_i%20&plus;%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B-%20y_i%5Comega_i%20&plus;%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%20&plus;%20%5Clambda%20%5Csum_%7Bi%3D1%7D%5E%7Bj%7D%5Ctheta%20_i%20%5E%7B2%7D%5Cnonumber%20%5Cend%7Balign%7D)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20loss%20function%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B-%20y_i%5Comega_i%20&plus;%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%5Cnonumber%20%5C%5C%20%26%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B-%20y_i%5Comega_i%20&plus;%20%5Clog%20%281&plus;e%5E%7B%5Comega_i%7D%29%5D%20&plus;%20%5Clambda%20%5Csum_%7Bi%3D1%7D%5E%7Bj%7D%5Ctheta%20_i%20%5E%7B2%7D%5Cnonumber%20%5Cend%7Balign%7D)
 
 	where j is entity's jth dimension.
 
@@ -239,7 +248,7 @@ Suppose θj is jth partial derivative :
 
 Since it has mutiple dimensions,we compute partial derivatives:
 
-![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_1%5E%7B%28i%29%7D&plus;x_1%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_1%20%5Cnonumber%20%5C%5C%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_2%7D%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_2%5E%7B%28i%29%7D&plus;x_2%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_2%20%5Cnonumber%20%5C%5C%20...%20%5Cnonumber%20%5C%5C%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%20%3D%20%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_d%5E%7B%28i%29%7D&plus;x_d%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_d%20%5Cnonumber%20%5Cend%7Balign%7D)
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_1%7D%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_1%5E%7B%28i%29%7D&plus;x_1%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_1%20%5Cnonumber%20%5C%5C%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_2%7D%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_2%5E%7B%28i%29%7D&plus;x_2%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_2%20%5Cnonumber%20%5C%5C%20...%20%5Cnonumber%20%5C%5C%20%5Cfrac%7B%5Cpartial%20l%7D%7B%5Cpartial%20%5Ctheta%20_d%7D%20%3D%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5By_ix_d%5E%7B%28i%29%7D&plus;x_d%5E%7B%28i%29%7D%5Cfrac%7Be%5E%7B%5Comega_i%7D%7D%7B1&plus;e%5E%7B%5Comega_i%7D%7D%5D&plus;2%5Clambda%20%5Comega%20_d%20%5Cnonumber%20%5Cend%7Balign%7D)
 	
 
 **Gradient Descent pseudocode in Pyspark**
@@ -250,6 +259,10 @@ Since it has mutiple dimensions,we compute partial derivatives:
 #### Implement code via Pyspark 
 
 ***Check [here](https://github.com/gnayoaixgnaw/Big_Data_Analytics/tree/main/assignment4)***
+
+
+### multi-class logistic regression
+
 
 
 ## Support victor machine
