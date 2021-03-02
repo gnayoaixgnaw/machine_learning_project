@@ -263,6 +263,30 @@ Since it has mutiple dimensions,we compute partial derivatives:
 
 ### multi-class logistic regression
 
+In binary-class lr model, we use sigmoid function to map samples to (0,1),but in more cases, we need multi-class classfication, so we use ***softmax*** function to map samples to multiple (0,1).
+
+Softmax can be written as a hypothesis function :
+
+![equation](https://latex.codecogs.com/gif.latex?h_%5Ctheta%20%28x%5E%7B%28i%29%7D%29%20%3D%20%5Cbegin%7Bbmatrix%7D%20p%28y%5E%7B%28i%29%7D%20%3D%201%7Cx%5E%7B%28i%29%7D%3B%5Ctheta%20%29%5C%5C%20p%28y%5E%7B%28i%29%7D%20%3D%202%7Cx%5E%7B%28i%29%7D%3B%5Ctheta%20%29%5C%5C%20...%5C%5C%20p%28y%5E%7B%28i%29%7D%20%3D%20k%7Cx%5E%7B%28i%29%7D%3B%5Ctheta%20%29%20%5Cend%7Bbmatrix%7D%20%3D%20%5Cfrac%7B1%7D%7B%5Csum_%7Bj%3D1%7D%5E%7Bk%7De%5E%7B%5Ctheta_j%20%5E%7BT%7D%20x%5E%7B%28i%29%7D%7D%7D%5Cbegin%7Bbmatrix%7D%20e%5E%7B%5Ctheta_1%20%5E%7BT%7D%20x%5E%7B%28i%29%7D%7D%5C%5C%20e%5E%7B%5Ctheta_2%20%5E%7BT%7D%20x%5E%7B%28i%29%7D%7D%5C%5C%20...%5C%5C%20e%5E%7B%5Ctheta_k%20%5E%7BT%7D%20x%5E%7B%28i%29%7D%7D%20%5Cend%7Bbmatrix%7D)
+
+	where k is the total number of classes, i is ith entity.
+
+then we can get the loss function,which is also be called log-likelihood cost:
+
+![equation](https://latex.codecogs.com/gif.latex?J%28%5Ctheta%20%29%20%3D%20-%5Cfrac%7B1%7D%7Bn%7D%5B%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5Csum_%7Bj%3D1%7D%5E%7Bk%7D1%5Cleft%20%5C%7B%20y%5E%7B%28i%29%7D%20%3D%20j%20%5Cright%20%5C%7D%5Clog%20%5Cfrac%7Be%5E%7B%5Ctheta%20_j%5ET%7Dx%5E%7B%28i%29%7D%7D%7B%5Csum_%7Bl%3D1%7D%5E%7Bk%7De%5E%7B%5Ctheta%20_l%5ET%7Dx%5E%7B%28i%29%7D%7D%5D)
+
+	where 1{expression} is a function that if expression in {} is true then 1{expression} = 1 ,else 0.
+	
+then rearrange it :
+
+![equation](https://latex.codecogs.com/gif.latex?J%28%5Ctheta%20%29%20%3D%20-%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5Csum_%7Bj%3D1%7D%5E%7Bk%7D1%5Cleft%20%5C%7B%20y%5E%7B%28i%29%7D%20%3D%20j%20%5Cright%20%5C%7D%5B%5Clog%20e%5E%7B%5Ctheta%20_j%5ET%7Dx%5E%7B%28i%29%7D-%20%5Clog%20%5Csum_%7Bl%3D1%7D%5E%7Bk%7De%5E%7B%5Ctheta%20_l%5ET%7Dx%5E%7B%28i%29%7D%5D)
+
+#### How to calculate gradient
+
+Suppose θj is jth partial derivative :
+
+![equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign%7D%20%5Cfrac%7B%5Cpartial%20J%28%5Ctheta%20%29%7D%7B%5Cpartial%20%5Ctheta%20_j%7D%20%26%20%3D%20-%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%20%5Bx%5E%7B%28i%29%7D%20%281%5Cleft%20%5C%7B%20y%5E%7B%28i%29%7D%20%3D%20j%20%5Cright%20%5C%7D%20-%20%5Cfrac%7Be%5E%7B%5Ctheta%20_j%5ET%7Dx%5E%7B%28i%29%7D%7D%7B%5Csum_%7Bl%3D1%7D%5E%7Bk%7De%5E%7B%5Ctheta%20_l%5ET%7Dx%5E%7B%28i%29%7D%7D%29%5D%20&plus;%202%5Clambda%20%5Ctheta%20_j%5Cnonumber%5C%5C%20%26%3D%20-%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5E%7Bn%7D%5B%20x%5E%7B%28i%29%7D%20%281%5Cleft%20%5C%7B%20y%5E%7B%28i%29%7D%20%3D%20j%20%5Cright%20%5C%7D%20-%20p%28y%5E%7B%28i%29%7D%3Dj%7Cx%5E%7B%28i%29%7D%3B%5Ctheta%20%29%29%5D%20&plus;%202%5Clambda%20%5Ctheta%20_j%20%5Cnonumber%20%5Cend%7Balign%7D)
+
 
 
 ## Support victor machine
